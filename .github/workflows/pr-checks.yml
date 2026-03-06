@@ -1,0 +1,34 @@
+on: [pull_request]
+jobs:
+  pre-commit:
+    name: pre-commit
+    runs-on: [self-hosted, cip]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - run: npm install && npm run bootstrap && npm run build
+      - uses: pre-commit/action@v2.0.3
+
+  npm-test:
+    name: npm-test
+    runs-on: [self-hosted, cip]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: install
+        run: npm install
+
+      - name: bootstrap
+        run: npm run bootstrap
+
+      - name: build test
+        working-directory: ./
+        run: npm run build
+
+      - name: test
+        working-directory: ./
+        run: npm test

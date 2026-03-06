@@ -1,0 +1,46 @@
+name: Publish package to GitHub Packages
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: [self-hosted, cip]
+
+    steps:
+      - name: Import Secrets
+        id: vault-secrets
+        uses: hashicorp/vault-action@v2.3.1
+        with:
+          url: https://vault.cicd-cip.dataverse.me
+          method: kubernetes
+          path: kubernetes-cicd-cip/
+          role: github-runners-cicd-cip
+          secrets: |
+            secret/data/devops/github-runners/cicd-cip/config PAT | PAT
+
+      - uses: actions/checkout@v3
+
+      # Setup .npmrc file to publish to GitHub Packages
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          always-auth: 'true'
+          registry-url: 'https://npm.pkg.github.com'
+          # Defaults to the user or organization that owns the workflow file
+          scope: '@dataverse'
+
+      - run: npm ci
+
+      - run: npm run bootstrap
+
+      - run: npm run build
+
+      - run: npm test
+
+      # Performs build an publish
+      - run: npm run publish -- --yes --registry https://npm.pkg.github.com
+        env:
+          NODE_AUTH_TOKEN: ${{ steps.vault-secrets.outputs.PAT }}

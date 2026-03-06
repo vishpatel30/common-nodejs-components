@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "discoveryPort",
+  "type": "object",
+  "title": "Discovery port",
+  "description": "Discovery port information is used to discover the data product",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the data product. The name should be unique within the organization.",
+      "minLength": 3,
+      "maxLength": 256
+    },
+    "shortDescription": {
+      "type": "string",
+      "description": "Short description that describes the products in few words.",
+      "minLength": 3,
+      "maxLength": 100
+    },
+    "longDescription": {
+      "type": "string",
+      "description": "Long Description"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags"
+    },
+    "dataTimeRange" : {
+      "$ref": "dataTimeRange"
+    },
+    "industryDomain": {
+      "type": "string"
+    },
+    "function": {
+      "type": "string"
+    },
+    "regulatoryFields": {
+      "$ref": "regulatoryFields"
+    },
+    "sampleData": {
+      "type": "object"
+    },
+    "collaterals": {
+      "type": "object"
+    }
+  },
+  "required": ["name"]
+}

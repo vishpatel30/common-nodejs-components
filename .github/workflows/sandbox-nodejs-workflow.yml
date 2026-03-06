@@ -1,0 +1,41 @@
+name: Build and Test components
+
+on:
+  push:
+    branches: [develop]
+    paths-ignore:
+      - 'charts/**'
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: [self-hosted, cip]
+
+    steps:
+      - name: Generate build ID
+        id: prep
+        run: |
+          sha=${GITHUB_SHA::7}
+          ts=$(date +'%d-%m-%Y')
+          echo "::set-output name=BUILD_ID::${sha}-${ts}"
+
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - name: install
+        run: npm install
+
+      - name: bootstrap
+        run: npm run bootstrap
+
+      - name: build test
+        working-directory: ./
+        run: npm run build
+
+      - name: test
+        working-directory: ./
+        run: npm test

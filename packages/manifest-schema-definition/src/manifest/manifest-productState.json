@@ -1,0 +1,3386 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "productState",
+  "title": "ProductState",
+  "type": "object",
+  "if": {
+    "properties": {
+      "isStateManagement": {
+        "const": true
+      }
+    }
+  },
+  "then": {
+    "if": {
+      "properties": {
+        "type": {
+          "const": "inputDelimited"
+        }
+      }
+    },
+    "then": {
+      "required": [
+        "stepName",
+        "path"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "isStateManagement": {
+          "type": "boolean"
+        },
+        "isDataProfilingEnabled": {
+          "type": "boolean"
+        },
+        "stepName": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "persistDataFrame": {
+          "type": "boolean"
+        },
+        "columnsToDecrypt": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "header": {
+          "type": "boolean"
+        },
+        "delimiter": {
+          "type": "string"
+        },
+        "charset": {
+          "type": "string"
+        },
+        "multiline": {
+          "type": "boolean"
+        },
+        "inferSchema": {
+          "type": "boolean"
+        },
+        "mode": {
+          "type": "string"
+        },
+        "nullValue": {
+          "type": "string"
+        },
+        "escape": {
+          "type": "string"
+        },
+        "quote": {
+          "type": "string"
+        },
+        "ignoreLeadingWhiteSpace": {
+          "type": "boolean"
+        },
+        "ignoreTrailingWhiteSpace": {
+          "type": "boolean"
+        },
+        "enforceSchema": {
+          "type": "boolean"
+        },
+        "timestampFormat": {
+          "type": "string"
+        },
+        "emptyValue": {
+          "type": "boolean"
+        },
+        "nanValue": {
+          "type": "string"
+        },
+        "columnNameOfCorruptRecord": {
+          "type": "string"
+        },
+        "dateFormat": {
+          "type": "string"
+        },
+        "maxColumns": {
+          "type": "string"
+        },
+        "maxCharsPerColumn": {
+          "type": "string"
+        },
+        "samplingRatio": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "charToEscapeQuoteEscaping": {
+          "type": "string"
+        },
+        "positiveInf": {
+          "type": "string"
+        },
+        "negativeInf": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "dataType",
+              "nullable"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "dataType": {
+                "type": "string"
+              },
+              "nullable": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "enableDataReconciliation": {
+          "type": "boolean"
+        },
+        "enforceSchemaMethod": {
+          "type": "string"
+        },
+        "logicalSchema": {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object"
+            },
+            "required": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              },
+              "minItems": 1
+            }
+          }
+        }
+      }
+    },
+    "else": {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "inputParquet"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "stepName",
+          "path"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "isStateManagement": {
+            "type": "boolean"
+          },
+          "isDataProfilingEnabled": {
+            "type": "boolean"
+          },
+          "stepName": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "persistDataFrame": {
+            "type": "boolean"
+          },
+          "columnsToDecrypt": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "enforceSchemaMethod": {
+            "type": "string"
+          },
+          "enforceSchema": {
+            "type": "boolean"
+          },
+          "enableDataReconciliation": {
+            "type": "boolean"
+          },
+          "logicalSchema": {
+            "type": "object",
+            "properties": {
+              "properties": {
+                "type": "object"
+              },
+              "required": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "minItems": 1
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "if": {
+          "properties": {
+            "type": {
+              "const": "readRedshiftTableByQuery"
+            }
+          }
+        },
+        "then": {
+          "additionalProperties": false,
+          "required": [
+            "stepName",
+            "connection",
+            "query",
+            "temporaryPathS3"
+          ],
+          "properties": {
+            "isStateManagement": {
+              "type": "boolean"
+            },
+            "isDataProfilingEnabled": {
+              "type": "boolean"
+            },
+            "stepName": {
+              "type": "string"
+            },
+            "query": {
+              "type": "string"
+            },
+            "connection": {
+              "type": "string"
+            },
+            "awsIAMRole": {
+              "type": "string"
+            },
+            "temporaryPathS3": {
+              "type": "string"
+            },
+            "isUser": {
+              "type": "boolean"
+            },
+            "persistDataFrame": {
+              "type": "boolean"
+            },
+            "enforceSchemaMethod": {
+              "type": "string"
+            },
+            "enforceSchema": {
+              "type": "boolean"
+            },
+            "enableDataReconciliation": {
+              "type": "boolean"
+            },
+            "logicalSchema": {
+              "type": "object",
+              "properties": {
+                "properties": {
+                  "type": "object"
+                },
+                "required": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "minItems": 1
+                }
+              }
+            }
+          }
+        },
+        "else": {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "readMySqlDbUsingJdbc"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "stepName",
+              "connection",
+              "tableName/query"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "isStateManagement": {
+                "type": "boolean"
+              },
+              "stepName": {
+                "type": "string"
+              },
+              "connection": {
+                "type": "string"
+              },
+              "tableName/query": {
+                "type": "string"
+              },
+              "primaryKey": {
+                "type": "string"
+              },
+              "numRepartitions": {
+                "type": "string"
+              },
+              "persistDataFrame": {
+                "type": "boolean"
+              },
+              "enforceSchemaMethod": {
+                "type": "string"
+              },
+              "enforceSchema": {
+                "type": "boolean"
+              },
+              "enableDataReconciliation": {
+                "type": "boolean"
+              },
+              "logicalSchema": {
+                "type": "object",
+                "properties": {
+                  "properties": {
+                    "type": "object"
+                  },
+                  "required": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "minItems": 1
+                  }
+                }
+              },
+              "isDataProfilingEnabled": {
+                "type": "boolean"
+              }
+            }
+          },
+          "else": {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "readDataIceberg"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "stepName",
+                "tableName",
+                "warehousePath",
+                "catalogName"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "isStateManagement": {
+                  "type": "boolean"
+                },
+                "stepName": {
+                  "type": "string"
+                },
+                "tableName": {
+                  "type": "string"
+                },
+                "warehousePath": {
+                  "type": "string"
+                },
+                "catalogName": {
+                  "type": "string"
+                },
+                "columnsToDecrypt": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "persistDataFrame": {
+                  "type": "boolean"
+                },
+                "enforceSchemaMethod": {
+                  "type": "string"
+                },
+                "enforceSchema": {
+                  "type": "boolean"
+                },
+                "enableDataReconciliation": {
+                  "type": "boolean"
+                },
+                "logicalSchema": {
+                  "type": "object",
+                  "properties": {
+                    "properties": {
+                      "type": "object"
+                    },
+                    "required": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "minItems": 1
+                    }
+                  }
+                },
+                "isDataProfilingEnabled": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "else": {
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "inputDelimited",
+                    "inputParquet",
+                    "readRedshiftTableByQuery",
+                    "readMySqlDbUsingJdbc",
+                    "readDataIceberg"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "else": {
+    "if": {
+      "not": {
+        "properties": {
+          "isDynamic": {
+            "const": true
+          }
+        }
+      }
+    },
+    "then": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "refreshInterval": {
+              "type": "string"
+            },
+            "updateStrategy": {
+              "type": "string",
+              "enum": [
+                "scd1",
+                "scd2"
+              ]
+            },
+            "logicalSchemaUrn": {
+              "type": "string",
+              "pattern": "^(?:urn|URN):(?:dv|DV):schema:[A-Za-z0-9\\-]+$"
+            },
+            "logicalSchema": {
+              "type": "object",
+              "properties": {
+                "properties": {
+                  "type": "object"
+                },
+                "required": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "minItems": 1
+                }
+              }
+            },
+            "partitionColumns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            },
+            "encodingOptions": {
+              "type": "object",
+              "properties": {
+                "encodingType": {
+                  "type": "string",
+                  "enum": [
+                    "HASH",
+                    "ENCRYPT"
+                  ]
+                },
+                "columnsToEncode": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1
+                }
+              }
+            },
+            "updateStrategyOptions": {
+              "type": "object",
+              "properties": {
+                "actualTimeColumn": {
+                  "type": "string"
+                },
+                "timeTrackingColumn": {
+                  "type": "string"
+                },
+                "uniqueKeyColumns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1
+                },
+                "changeTrackingColumns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1
+                }
+              },
+              "required": [
+                "actualTimeColumn",
+                "timeTrackingColumn",
+                "uniqueKeyColumns",
+                "changeTrackingColumns"
+              ]
+            }
+          },
+          "required": [
+            "refreshInterval",
+            "updateStrategy",
+            "updateStrategyOptions"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "refreshInterval": {
+              "type": "string"
+            },
+            "updateStrategy": {
+              "type": "string",
+              "enum": [
+                "Append",
+                "Overwrite"
+              ]
+            },
+            "logicalSchemaUrn": {
+              "type": "string",
+              "pattern": "^(?:urn|URN):(?:dv|DV):schema:[A-Za-z0-9\\-]+$"
+            },
+            "logicalSchema": {
+              "type": "object",
+              "properties": {
+                "properties": {
+                  "type": "object"
+                },
+                "required": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1
+                }
+              }
+            },
+            "partitionColumns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            },
+            "encodingOptions": {
+              "type": "object",
+              "properties": {
+                "encodingType": {
+                  "type": "string",
+                  "enum": [
+                    "HASH",
+                    "ENCRYPT"
+                  ]
+                },
+                "columnsToEncode": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1
+                }
+              }
+            },
+            "updateStrategyOptions": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "refreshInterval",
+            "updateStrategy"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stepName": {
+              "type": "string"
+            },
+            "updateStrategy": {
+              "type": "string",
+              "enum": [
+                "scd1",
+                "scd2",
+                "Append",
+                "Overwrite"
+              ]
+            },
+            "inputDataFrame": {
+              "type": "string"
+            },
+            "tableName": {
+              "type": "string"
+            },
+            "warehousePath": {
+              "type": "string"
+            },
+            "catalogName": {
+              "type": "string"
+            },
+            "updateStrategyOptions": {
+              "type": "object",
+              "properties": {
+                "actualTimeColumn": {
+                  "type": "string"
+                },
+                "timeTrackingColumn": {
+                  "type": "string"
+                },
+                "uniqueKeyColumns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1
+                },
+                "changeTrackingColumns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1
+                }
+              },
+              "required": [
+                "actualTimeColumn",
+                "timeTrackingColumn",
+                "uniqueKeyColumns",
+                "changeTrackingColumns"
+              ]
+            },
+            "stateType": {
+              "type": "string"
+            },
+            "stateName": {
+              "type": "string"
+            },
+            "optional": {
+              "type": "object"
+            },
+            "type": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "refreshInterval",
+            "updateStrategy",
+            "updateStrategyOptions"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "refreshInterval": {
+              "type": "string"
+            },
+            "tableName": {
+              "type": "string"
+            },
+            "stateStoreType": {
+              "type": "string"
+            },
+            "temporaryPath": {
+              "type": "string"
+            },
+            "logicalSchemaUrn": {
+              "type": "string",
+              "pattern": "^(?:urn|URN):(?:dv|DV):schema:[A-Za-z0-9\\-]+$"
+            },
+            "logicalSchema": {
+              "type": "object",
+              "properties": {
+                "properties": {
+                  "type": "object"
+                },
+                "required": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1
+                }
+              }
+            },
+            "encodingOptions": {
+              "type": "object",
+              "properties": {
+                "encodingType": {
+                  "type": "string",
+                  "enum": [
+                    "HASH",
+                    "ENCRYPT"
+                  ]
+                },
+                "columnsToEncode": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1
+                }
+              }
+            }
+          },
+          "required": [
+            "refreshInterval",
+            "tableName",
+            "stateStoreType",
+            "temporaryPath"
+          ]
+        }
+      ]
+    },
+    "else": {
+      "if": {
+        "properties": {
+          "stateStoreType": {
+            "const": "saveTableDB"
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "connection": {
+            "type": "string"
+          },
+          "tableName": {
+            "type": "string"
+          },
+          "optional": {
+            "type": "object",
+            "properties": {
+              "persistDataFrame": {
+                "type": "boolean"
+              },
+              "addRunIdColumn": {
+                "type": "boolean"
+              },
+              "enableDataReconciliation": {
+                "type": "boolean"
+              },
+              "enforceSchema": {
+                "type": "boolean"
+              },
+              "enforceSchemaMethod": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true,
+            "required": []
+          },
+          "alias": {
+            "type": "string"
+          },
+          "logicalSchema": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {},
+            "required": []
+          },
+          "isProfilingEnabled": {
+            "type": "boolean"
+          },
+          "isDynamic": {
+            "type": "boolean"
+          },
+          "retentionVersions": {
+            "type": "string"
+          },
+          "stateStoreType": {
+            "type": "string"
+          },
+          "updateStrategy": {
+            "type": "string"
+          },
+          "updateStrategyOptions": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {},
+            "required": []
+          }
+        },
+        "required": [
+          "connection",
+          "tableName",
+          "alias",
+          "logicalSchema",
+          "isProfilingEnabled",
+          "isDynamic",
+          "retentionVersions",
+          "stateStoreType"
+        ]
+      },
+      "else": {
+        "if": {
+          "properties": {
+            "stateStoreType": {
+              "const": "writeDataFrameToParquet"
+            }
+          }
+        },
+        "then": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "optional": {
+              "type": "object",
+              "properties": {
+                "persistDataFrame": {
+                  "type": "boolean"
+                },
+                "dynamicPartitionRequired": {
+                  "type": "boolean"
+                },
+                "encodingType": {
+                  "type": "string"
+                },
+                "columnsToEncode": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "partitionFiles": {
+                  "type": "integer"
+                },
+                "partitionColumnList": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "addRunIdColumn": {
+                  "type": "boolean"
+                },
+                "enableDataReconciliation": {
+                  "type": "boolean"
+                },
+                "enforceSchema": {
+                  "type": "boolean"
+                },
+                "enforceSchemaMethod": {
+                  "type": "string"
+                },
+                "connection": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": true,
+              "required": []
+            },
+            "alias": {
+              "type": "string"
+            },
+            "logicalSchema": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {},
+              "required": []
+            },
+            "isProfilingEnabled": {
+              "type": "boolean"
+            },
+            "isDynamic": {
+              "type": "boolean"
+            },
+            "retentionVersions": {
+              "type": "string"
+            },
+            "stateStoreType": {
+              "type": "string"
+            },
+            "updateStrategy": {
+              "type": "string"
+            },
+            "updateStrategyOptions": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {},
+              "required": []
+            }
+          },
+          "required": [
+            "path",
+            "alias",
+            "logicalSchema",
+            "isProfilingEnabled",
+            "isDynamic",
+            "retentionVersions",
+            "stateStoreType"
+          ]
+        },
+        "else": {
+          "if": {
+            "properties": {
+              "stateStoreType": {
+                "const": "writeDataFrameToCsv"
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "partitionFiles": {
+                "type": "integer"
+              },
+              "path": {
+                "type": "string"
+              },
+              "optional": {
+                "type": "object",
+                "properties": {
+                  "persistDataFrame": {
+                    "type": "boolean"
+                  },
+                  "dynamicPartitionRequired": {
+                    "type": "boolean"
+                  },
+                  "encodingType": {
+                    "type": "string"
+                  },
+                  "columnsToEncode": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "overwrite": {
+                    "type": "boolean"
+                  },
+                  "advanceOptions": {
+                    "type": "object",
+                    "properties": {
+                      "dateFormat": {
+                        "type": "string"
+                      },
+                      "delimiter": {
+                        "type": "string"
+                      },
+                      "quote": {
+                        "type": "string"
+                      },
+                      "escape": {
+                        "type": "string"
+                      },
+                      "nullValue": {
+                        "type": "string"
+                      },
+                      "quoteAll": {
+                        "type": "boolean"
+                      },
+                      "timestampFormat": {
+                        "type": "string"
+                      },
+                      "header": {
+                        "type": "boolean"
+                      }
+                    },
+                    "additionalProperties": true,
+                    "required": []
+                  },
+                  "addRunIdColumn": {
+                    "type": "boolean"
+                  },
+                  "enableDataReconciliation": {
+                    "type": "boolean"
+                  },
+                  "enforceSchema": {
+                    "type": "boolean"
+                  },
+                  "enforceSchemaMethod": {
+                    "type": "string"
+                  },
+                  "connection": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": true,
+                "required": []
+              },
+              "alias": {
+                "type": "string"
+              },
+              "logicalSchema": {
+                "type": "object",
+                "additionalProperties": true,
+                "properties": {},
+                "required": []
+              },
+              "isProfilingEnabled": {
+                "type": "boolean"
+              },
+              "isDynamic": {
+                "type": "boolean"
+              },
+              "retentionVersions": {
+                "type": "string"
+              },
+              "stateStoreType": {
+                "type": "string"
+              },
+              "updateStrategy": {
+                "type": "string"
+              },
+              "updateStrategyOptions": {
+                "type": "object",
+                "additionalProperties": true,
+                "properties": {},
+                "required": []
+              }
+            },
+            "required": [
+              "partitionFiles",
+              "path",
+              "alias",
+              "logicalSchema",
+              "isProfilingEnabled",
+              "isDynamic",
+              "retentionVersions",
+              "stateStoreType"
+            ]
+          },
+          "else": {
+            "if": {
+              "properties": {
+                "stateStoreType": {
+                  "const": "writeDataFrameToFileSFTP"
+                }
+              }
+            },
+            "then": {
+              "type": "object",
+              "properties": {
+                "connection": {
+                  "type": "string"
+                },
+                "filePath": {
+                  "type": "string"
+                },
+                "fileName": {
+                  "type": "string"
+                },
+                "fileType": {
+                  "type": "string"
+                },
+                "optional": {
+                  "type": "object",
+                  "properties": {
+                    "localFilePath": {
+                      "type": "string"
+                    },
+                    "persistDataFrame": {
+                      "type": "boolean"
+                    },
+                    "passOption": {
+                      "type": "object",
+                      "properties": {
+                        "pem": {
+                          "type": "string"
+                        },
+                        "pemPassphrase": {
+                          "type": "string"
+                        },
+                        "password": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": true,
+                      "required": []
+                    },
+                    "csvOption": {
+                      "type": "object",
+                      "properties": {
+                        "dateFormat": {
+                          "type": "string"
+                        },
+                        "delimiter": {
+                          "type": "string"
+                        },
+                        "header": {
+                          "type": "boolean"
+                        },
+                        "quote": {
+                          "type": "string"
+                        },
+                        "escape": {
+                          "type": "string"
+                        },
+                        "nullValue": {
+                          "type": "string"
+                        },
+                        "quoteAll": {
+                          "type": "string"
+                        },
+                        "timestampFormat": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": true,
+                      "required": []
+                    },
+                    "addRunIdColumn": {
+                      "type": "boolean"
+                    },
+                    "enableDataReconciliation": {
+                      "type": "boolean"
+                    },
+                    "enforceSchema": {
+                      "type": "boolean"
+                    },
+                    "enforceSchemaMethod": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": true,
+                  "required": []
+                },
+                "alias": {
+                  "type": "string"
+                },
+                "logicalSchema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {},
+                  "required": []
+                },
+                "isProfilingEnabled": {
+                  "type": "boolean"
+                },
+                "isDynamic": {
+                  "type": "boolean"
+                },
+                "retentionVersions": {
+                  "type": "string"
+                },
+                "stateStoreType": {
+                  "type": "string"
+                },
+                "updateStrategy": {
+                  "type": "string"
+                },
+                "updateStrategyOptions": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {},
+                  "required": []
+                }
+              },
+              "required": [
+                "connection",
+                "filePath",
+                "fileName",
+                "fileType",
+                "alias",
+                "logicalSchema",
+                "isProfilingEnabled",
+                "isDynamic",
+                "retentionVersions",
+                "stateStoreType"
+              ]
+            },
+            "else": {
+              "if": {
+                "properties": {
+                  "stateStoreType": {
+                    "const": "saveTableAPI"
+                  }
+                }
+              },
+              "then": {
+                "type": "object",
+                "properties": {
+                  "URL": {
+                    "type": "string"
+                  },
+                  "userId": {
+                    "type": "string"
+                  },
+                  "viewID": {
+                    "type": "string"
+                  },
+                  "tempWriteOutPath": {
+                    "type": "string"
+                  },
+                  "optional": {
+                    "type": "object",
+                    "properties": {
+                      "persistDataFrame": {
+                        "type": "boolean"
+                      },
+                      "connectionTimeout": {
+                        "type": "integer"
+                      },
+                      "readTimeout": {
+                        "type": "integer"
+                      },
+                      "apiBodyLimit": {
+                        "type": "integer"
+                      },
+                      "addRunIdColumn": {
+                        "type": "boolean"
+                      },
+                      "enableDataReconciliation": {
+                        "type": "boolean"
+                      },
+                      "enforceSchema": {
+                        "type": "boolean"
+                      },
+                      "enforceSchemaMethod": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": true,
+                    "required": []
+                  },
+                  "alias": {
+                    "type": "string"
+                  },
+                  "logicalSchema": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "properties": {},
+                    "required": []
+                  },
+                  "isProfilingEnabled": {
+                    "type": "boolean"
+                  },
+                  "isDynamic": {
+                    "type": "boolean"
+                  },
+                  "retentionVersions": {
+                    "type": "string"
+                  },
+                  "stateStoreType": {
+                    "type": "string"
+                  },
+                  "updateStrategy": {
+                    "type": "string"
+                  },
+                  "updateStrategyOptions": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "properties": {},
+                    "required": []
+                  }
+                },
+                "required": [
+                  "URL",
+                  "userId",
+                  "viewID",
+                  "tempWriteOutPath",
+                  "alias",
+                  "logicalSchema",
+                  "isProfilingEnabled",
+                  "isDynamic",
+                  "retentionVersions",
+                  "stateStoreType"
+                ]
+              },
+              "else": {
+                "if": {
+                  "properties": {
+                    "stateStoreType": {
+                      "const": "sendDataToKafkaTopic"
+                    }
+                  }
+                },
+                "then": {
+                  "type": "object",
+                  "properties": {
+                    "keyColumn": {
+                      "type": "string"
+                    },
+                    "topicName": {
+                      "type": "string"
+                    },
+                    "connection": {
+                      "type": "string"
+                    },
+                    "optional": {
+                      "type": "object",
+                      "properties": {
+                        "persistDataFrame": {
+                          "type": "boolean"
+                        },
+                        "addRunIdColumn": {
+                          "type": "boolean"
+                        },
+                        "enableDataReconciliation": {
+                          "type": "boolean"
+                        },
+                        "enforceSchema": {
+                          "type": "boolean"
+                        },
+                        "enforceSchemaMethod": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": true,
+                      "required": []
+                    },
+                    "alias": {
+                      "type": "string"
+                    },
+                    "logicalSchema": {
+                      "type": "object",
+                      "additionalProperties": true,
+                      "properties": {},
+                      "required": []
+                    },
+                    "isProfilingEnabled": {
+                      "type": "boolean"
+                    },
+                    "isDynamic": {
+                      "type": "boolean"
+                    },
+                    "retentionVersions": {
+                      "type": "string"
+                    },
+                    "stateStoreType": {
+                      "type": "string"
+                    },
+                    "updateStrategy": {
+                      "type": "string"
+                    },
+                    "updateStrategyOptions": {
+                      "type": "object",
+                      "additionalProperties": true,
+                      "properties": {},
+                      "required": []
+                    }
+                  },
+                  "required": [
+                    "keyColumn",
+                    "topicName",
+                    "connection",
+                    "alias",
+                    "logicalSchema",
+                    "isProfilingEnabled",
+                    "isDynamic",
+                    "retentionVersions",
+                    "stateStoreType"
+                  ]
+                },
+                "else": {
+                  "if": {
+                    "properties": {
+                      "stateStoreType": {
+                        "const": "queryExecuteUpdate"
+                      }
+                    }
+                  },
+                  "then": {
+                    "type": "object",
+                    "properties": {
+                      "connection": {
+                        "type": "string"
+                      },
+                      "query": {
+                        "type": "string"
+                      },
+                      "optional": {
+                        "type": "object",
+                        "properties": {
+                          "persistDataFrame": {
+                            "type": "boolean"
+                          },
+                          "dbServerType": {
+                            "type": "string"
+                          },
+                          "warehouse": {
+                            "type": "string"
+                          },
+                          "role": {
+                            "type": "string"
+                          },
+                          "enforceSchema": {
+                            "type": "boolean"
+                          },
+                          "enforceSchemaMethod": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true,
+                        "required": []
+                      },
+                      "alias": {
+                        "type": "string"
+                      },
+                      "logicalSchema": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "properties": {},
+                        "required": []
+                      },
+                      "isProfilingEnabled": {
+                        "type": "boolean"
+                      },
+                      "isDynamic": {
+                        "type": "boolean"
+                      },
+                      "retentionVersions": {
+                        "type": "string"
+                      },
+                      "stateStoreType": {
+                        "type": "string"
+                      },
+                      "updateStrategy": {
+                        "type": "string"
+                      },
+                      "updateStrategyOptions": {
+                        "type": "object",
+                        "additionalProperties": true,
+                        "properties": {},
+                        "required": []
+                      }
+                    },
+                    "required": [
+                      "connection",
+                      "query",
+                      "alias",
+                      "logicalSchema",
+                      "isProfilingEnabled",
+                      "isDynamic",
+                      "retentionVersions",
+                      "stateStoreType"
+                    ]
+                  },
+                  "else": {
+                    "if": {
+                      "properties": {
+                        "stateStoreType": {
+                          "const": "loadDataFileToTable"
+                        }
+                      }
+                    },
+                    "then": {
+                      "type": "object",
+                      "properties": {
+                        "connection": {
+                          "type": "string"
+                        },
+                        "temporaryPath": {
+                          "type": "string"
+                        },
+                        "tableName": {
+                          "type": "string"
+                        },
+                        "optional": {
+                          "type": "object",
+                          "properties": {
+                            "delimiter": {
+                              "type": "string"
+                            },
+                            "escapeChar": {
+                              "type": "string"
+                            },
+                            "header": {
+                              "type": "boolean"
+                            },
+                            "columnList": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "newLineChar": {
+                              "type": "string"
+                            },
+                            "quoteChar": {
+                              "type": "string"
+                            },
+                            "persistDataFrame": {
+                              "type": "boolean"
+                            },
+                            "addRunIdColumn": {
+                              "type": "boolean"
+                            },
+                            "enableDataReconciliation": {
+                              "type": "boolean"
+                            },
+                            "enforceSchema": {
+                              "type": "boolean"
+                            },
+                            "enforceSchemaMethod": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": true,
+                          "required": []
+                        },
+                        "alias": {
+                          "type": "string"
+                        },
+                        "logicalSchema": {
+                          "type": "object",
+                          "additionalProperties": true,
+                          "properties": {},
+                          "required": []
+                        },
+                        "isProfilingEnabled": {
+                          "type": "boolean"
+                        },
+                        "isDynamic": {
+                          "type": "boolean"
+                        },
+                        "retentionVersions": {
+                          "type": "string"
+                        },
+                        "stateStoreType": {
+                          "type": "string"
+                        },
+                        "updateStrategy": {
+                          "type": "string"
+                        },
+                        "updateStrategyOptions": {
+                          "type": "object",
+                          "additionalProperties": true,
+                          "properties": {},
+                          "required": []
+                        }
+                      },
+                      "required": [
+                        "connection",
+                        "temporaryPath",
+                        "tableName",
+                        "alias",
+                        "logicalSchema",
+                        "isProfilingEnabled",
+                        "isDynamic",
+                        "retentionVersions",
+                        "stateStoreType"
+                      ]
+                    },
+                    "else": {
+                      "if": {
+                        "properties": {
+                          "stateStoreType": {
+                            "const": "cpImportDataframe"
+                          }
+                        }
+                      },
+                      "then": {
+                        "type": "object",
+                        "properties": {
+                          "connection": {
+                            "type": "string"
+                          },
+                          "temporaryPath": {
+                            "type": "string"
+                          },
+                          "tableName": {
+                            "type": "string"
+                          },
+                          "userServer": {
+                            "type": "string"
+                          },
+                          "optional": {
+                            "type": "object",
+                            "properties": {
+                              "localTemporaryPath": {
+                                "type": "string"
+                              },
+                              "cpimportCommand": {
+                                "type": "string"
+                              },
+                              "passOption": {
+                                "type": "object",
+                                "properties": {
+                                  "pem": {
+                                    "type": "string"
+                                  },
+                                  "password": {
+                                    "type": "string"
+                                  },
+                                  "pemPassphrase": {
+                                    "type": "string"
+                                  }
+                                },
+                                "additionalProperties": true,
+                                "required": []
+                              },
+                              "sshRequired": {
+                                "type": "boolean"
+                              },
+                              "passwordRequired": {
+                                "type": "boolean"
+                              },
+                              "persistDataFrame": {
+                                "type": "boolean"
+                              },
+                              "addRunIdColumn": {
+                                "type": "boolean"
+                              },
+                              "enableDataReconciliation": {
+                                "type": "boolean"
+                              },
+                              "enforceSchema": {
+                                "type": "boolean"
+                              },
+                              "enforceSchemaMethod": {
+                                "type": "string"
+                              }
+                            },
+                            "additionalProperties": true,
+                            "required": []
+                          },
+                          "alias": {
+                            "type": "string"
+                          },
+                          "logicalSchema": {
+                            "type": "object",
+                            "additionalProperties": true,
+                            "properties": {},
+                            "required": []
+                          },
+                          "isProfilingEnabled": {
+                            "type": "boolean"
+                          },
+                          "isDynamic": {
+                            "type": "boolean"
+                          },
+                          "retentionVersions": {
+                            "type": "string"
+                          },
+                          "stateStoreType": {
+                            "type": "string"
+                          },
+                          "updateStrategy": {
+                            "type": "string"
+                          },
+                          "updateStrategyOptions": {
+                            "type": "object",
+                            "additionalProperties": true,
+                            "properties": {},
+                            "required": []
+                          }
+                        },
+                        "required": [
+                          "connection",
+                          "temporaryPath",
+                          "tableName",
+                          "userServer",
+                          "alias",
+                          "logicalSchema",
+                          "isProfilingEnabled",
+                          "isDynamic",
+                          "retentionVersions",
+                          "stateStoreType"
+                        ]
+                      },
+                      "else": {
+                        "if": {
+                          "properties": {
+                            "stateStoreType": {
+                              "const": "writeDataFrameToRedshiftTable"
+                            }
+                          }
+                        },
+                        "then": {
+                          "type": "object",
+                          "properties": {
+                            "connection": {
+                              "type": "string"
+                            },
+                            "tableName": {
+                              "type": "string"
+                            },
+                            "endPoint": {
+                              "type": "string"
+                            },
+                            "temporaryPathS3": {
+                              "type": "string"
+                            },
+                            "optional": {
+                              "type": "object",
+                              "properties": {
+                                "s3connections": {
+                                  "type": "string"
+                                },
+                                "persistDataFrame": {
+                                  "type": "boolean"
+                                },
+                                "addRunIdColumn": {
+                                  "type": "boolean"
+                                },
+                                "enableDataReconciliation": {
+                                  "type": "boolean"
+                                },
+                                "enforceSchema": {
+                                  "type": "boolean"
+                                },
+                                "enforceSchemaMethod": {
+                                  "type": "string"
+                                },
+                                "isUser": {
+                                  "type": "boolean"
+                                },
+                                "awsIAMRole": {
+                                  "type": "string"
+                                },
+                                "changeTrackingColumns": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "encodingType": {
+                                  "type": "string"
+                                },
+                                "columnsToEncode": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "timestampColumn": {
+                                  "type": "string"
+                                },
+                                "primaryKey": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "additionalProperties": true,
+                              "required": []
+                            },
+                            "alias": {
+                              "type": "string"
+                            },
+                            "logicalSchema": {
+                              "type": "object",
+                              "additionalProperties": true,
+                              "properties": {},
+                              "required": []
+                            },
+                            "isProfilingEnabled": {
+                              "type": "boolean"
+                            },
+                            "isDynamic": {
+                              "type": "boolean"
+                            },
+                            "retentionVersions": {
+                              "type": "string"
+                            },
+                            "stateStoreType": {
+                              "type": "string"
+                            },
+                            "updateStrategy": {
+                              "type": "string"
+                            },
+                            "updateStrategyOptions": {
+                              "type": "object",
+                              "additionalProperties": true,
+                              "properties": {},
+                              "required": []
+                            }
+                          },
+                          "required": [
+                            "connection",
+                            "tableName",
+                            "endPoint",
+                            "temporaryPathS3",
+                            "alias",
+                            "logicalSchema",
+                            "isProfilingEnabled",
+                            "isDynamic",
+                            "retentionVersions",
+                            "stateStoreType"
+                          ]
+                        },
+                        "else": {
+                          "if": {
+                            "properties": {
+                              "stateStoreType": {
+                                "const": "writeDataFrameToSQLServerTable"
+                              }
+                            }
+                          },
+                          "then": {
+                            "type": "object",
+                            "properties": {
+                              "connection": {
+                                "type": "string"
+                              },
+                              "tableName": {
+                                "type": "string"
+                              },
+                              "optional": {
+                                "type": "object",
+                                "properties": {
+                                  "persistDataFrame": {
+                                    "type": "boolean"
+                                  },
+                                  "addRunIdColumn": {
+                                    "type": "boolean"
+                                  },
+                                  "enableDataReconciliation": {
+                                    "type": "boolean"
+                                  },
+                                  "enforceSchema": {
+                                    "type": "boolean"
+                                  },
+                                  "enforceSchemaMethod": {
+                                    "type": "string"
+                                  }
+                                },
+                                "additionalProperties": true,
+                                "required": []
+                              },
+                              "alias": {
+                                "type": "string"
+                              },
+                              "logicalSchema": {
+                                "type": "object",
+                                "additionalProperties": true,
+                                "properties": {},
+                                "required": []
+                              },
+                              "isProfilingEnabled": {
+                                "type": "boolean"
+                              },
+                              "isDynamic": {
+                                "type": "boolean"
+                              },
+                              "retentionVersions": {
+                                "type": "string"
+                              },
+                              "stateStoreType": {
+                                "type": "string"
+                              },
+                              "updateStrategy": {
+                                "type": "string"
+                              },
+                              "updateStrategyOptions": {
+                                "type": "object",
+                                "additionalProperties": true,
+                                "properties": {},
+                                "required": []
+                              }
+                            },
+                            "required": [
+                              "connection",
+                              "tableName",
+                              "alias",
+                              "logicalSchema",
+                              "isProfilingEnabled",
+                              "isDynamic",
+                              "retentionVersions",
+                              "stateStoreType"
+                            ]
+                          },
+                          "else": {
+                            "if": {
+                              "properties": {
+                                "stateStoreType": {
+                                  "const": "updateDataAxiomTableMySQL"
+                                }
+                              }
+                            },
+                            "then": {
+                              "type": "object",
+                              "properties": {
+                                "denormConnection": {
+                                  "type": "string"
+                                },
+                                "axiomConnection": {
+                                  "type": "string"
+                                },
+                                "viewID": {
+                                  "type": "integer"
+                                },
+                                "userID": {
+                                  "type": "integer"
+                                },
+                                "appURL": {
+                                  "type": "string"
+                                },
+                                "userServer": {
+                                  "type": "string"
+                                },
+                                "serverTemporaryPath": {
+                                  "type": "string"
+                                },
+                                "updateOptionsAxiom": {
+                                  "type": "string"
+                                },
+                                "optional": {
+                                  "type": "object",
+                                  "properties": {
+                                    "localTemporaryPath": {
+                                      "type": "string"
+                                    },
+                                    "cpimportCommand": {
+                                      "type": "string"
+                                    },
+                                    "passOption": {
+                                      "type": "object",
+                                      "properties": {
+                                        "pem": {
+                                          "type": "string"
+                                        },
+                                        "password": {
+                                          "type": "string"
+                                        },
+                                        "pemPassphrase": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "additionalProperties": true,
+                                      "required": []
+                                    },
+                                    "sshRequired": {
+                                      "type": "boolean"
+                                    },
+                                    "passwordRequired": {
+                                      "type": "boolean"
+                                    },
+                                    "deleteCondition": {
+                                      "type": "string"
+                                    },
+                                    "persistDataFrame": {
+                                      "type": "boolean"
+                                    },
+                                    "addRunIdColumn": {
+                                      "type": "boolean"
+                                    },
+                                    "enableDataReconciliation": {
+                                      "type": "boolean"
+                                    },
+                                    "enforceSchema": {
+                                      "type": "boolean"
+                                    },
+                                    "enforceSchemaMethod": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "additionalProperties": true,
+                                  "required": []
+                                },
+                                "alias": {
+                                  "type": "string"
+                                },
+                                "logicalSchema": {
+                                  "type": "object",
+                                  "additionalProperties": true,
+                                  "properties": {},
+                                  "required": []
+                                },
+                                "isProfilingEnabled": {
+                                  "type": "boolean"
+                                },
+                                "isDynamic": {
+                                  "type": "boolean"
+                                },
+                                "retentionVersions": {
+                                  "type": "string"
+                                },
+                                "stateStoreType": {
+                                  "type": "string"
+                                },
+                                "updateStrategy": {
+                                  "type": "string"
+                                },
+                                "updateStrategyOptions": {
+                                  "type": "object",
+                                  "additionalProperties": true,
+                                  "properties": {},
+                                  "required": []
+                                }
+                              },
+                              "required": [
+                                "denormConnection",
+                                "axiomConnection",
+                                "viewID",
+                                "userID",
+                                "appURL",
+                                "userServer",
+                                "serverTemporaryPath",
+                                "updateOptionsAxiom",
+                                "alias",
+                                "logicalSchema",
+                                "isProfilingEnabled",
+                                "isDynamic",
+                                "retentionVersions",
+                                "stateStoreType"
+                              ]
+                            },
+                            "else": {
+                              "if": {
+                                "properties": {
+                                  "stateStoreType": {
+                                    "const": "updateDataAxiomTableRedshift"
+                                  }
+                                }
+                              },
+                              "then": {
+                                "type": "object",
+                                "properties": {
+                                  "denormConnection": {
+                                    "type": "string"
+                                  },
+                                  "axiomConnection": {
+                                    "type": "string"
+                                  },
+                                  "viewID": {
+                                    "type": "integer"
+                                  },
+                                  "userID": {
+                                    "type": "integer"
+                                  },
+                                  "appURL": {
+                                    "type": "string"
+                                  },
+                                  "accessKey": {
+                                    "type": "string"
+                                  },
+                                  "secretKey": {
+                                    "type": "string"
+                                  },
+                                  "endPoint": {
+                                    "type": "string"
+                                  },
+                                  "temporaryPathS3": {
+                                    "type": "string"
+                                  },
+                                  "updateOptionsAxiom": {
+                                    "type": "string"
+                                  },
+                                  "optional": {
+                                    "type": "object",
+                                    "properties": {
+                                      "deleteCondition": {
+                                        "type": "string"
+                                      },
+                                      "persistDataFrame": {
+                                        "type": "boolean"
+                                      },
+                                      "addRunIdColumn": {
+                                        "type": "boolean"
+                                      },
+                                      "enableDataReconciliation": {
+                                        "type": "boolean"
+                                      },
+                                      "enforceSchema": {
+                                        "type": "boolean"
+                                      },
+                                      "enforceSchemaMethod": {
+                                        "type": "string"
+                                      },
+                                      "isUser": {
+                                        "type": "boolean"
+                                      },
+                                      "awsIAMRole": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "additionalProperties": true,
+                                    "required": []
+                                  },
+                                  "alias": {
+                                    "type": "string"
+                                  },
+                                  "logicalSchema": {
+                                    "type": "object",
+                                    "additionalProperties": true,
+                                    "properties": {},
+                                    "required": []
+                                  },
+                                  "isProfilingEnabled": {
+                                    "type": "boolean"
+                                  },
+                                  "isDynamic": {
+                                    "type": "boolean"
+                                  },
+                                  "retentionVersions": {
+                                    "type": "string"
+                                  },
+                                  "stateStoreType": {
+                                    "type": "string"
+                                  },
+                                  "updateStrategy": {
+                                    "type": "string"
+                                  },
+                                  "updateStrategyOptions": {
+                                    "type": "object",
+                                    "additionalProperties": true,
+                                    "properties": {},
+                                    "required": []
+                                  }
+                                },
+                                "required": [
+                                  "denormConnection",
+                                  "axiomConnection",
+                                  "viewID",
+                                  "userID",
+                                  "appURL",
+                                  "accessKey",
+                                  "secretKey",
+                                  "endPoint",
+                                  "temporaryPathS3",
+                                  "updateOptionsAxiom",
+                                  "alias",
+                                  "logicalSchema",
+                                  "isProfilingEnabled",
+                                  "isDynamic",
+                                  "retentionVersions",
+                                  "stateStoreType"
+                                ]
+                              },
+                              "else": {
+                                "if": {
+                                  "properties": {
+                                    "stateStoreType": {
+                                      "const": "updateDataAxiomTableSQLServer"
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "type": "object",
+                                  "properties": {
+                                    "denormConnection": {
+                                      "type": "string"
+                                    },
+                                    "axiomConnection": {
+                                      "type": "string"
+                                    },
+                                    "viewID": {
+                                      "type": "integer"
+                                    },
+                                    "userID": {
+                                      "type": "integer"
+                                    },
+                                    "appURL": {
+                                      "type": "string"
+                                    },
+                                    "updateOptionsAxiom": {
+                                      "type": "string"
+                                    },
+                                    "optional": {
+                                      "type": "object",
+                                      "properties": {
+                                        "deleteCondition": {
+                                          "type": "string"
+                                        },
+                                        "persistDataFrame": {
+                                          "type": "boolean"
+                                        },
+                                        "addRunIdColumn": {
+                                          "type": "boolean"
+                                        },
+                                        "enableDataReconciliation": {
+                                          "type": "boolean"
+                                        },
+                                        "enforceSchema": {
+                                          "type": "boolean"
+                                        },
+                                        "enforceSchemaMethod": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "additionalProperties": true,
+                                      "required": []
+                                    },
+                                    "alias": {
+                                      "type": "string"
+                                    },
+                                    "logicalSchema": {
+                                      "type": "object",
+                                      "additionalProperties": true,
+                                      "properties": {},
+                                      "required": []
+                                    },
+                                    "isProfilingEnabled": {
+                                      "type": "boolean"
+                                    },
+                                    "isDynamic": {
+                                      "type": "boolean"
+                                    },
+                                    "retentionVersions": {
+                                      "type": "string"
+                                    },
+                                    "stateStoreType": {
+                                      "type": "string"
+                                    },
+                                    "updateStrategy": {
+                                      "type": "string"
+                                    },
+                                    "updateStrategyOptions": {
+                                      "type": "object",
+                                      "additionalProperties": true,
+                                      "properties": {},
+                                      "required": []
+                                    }
+                                  },
+                                  "required": [
+                                    "denormConnection",
+                                    "axiomConnection",
+                                    "viewID",
+                                    "userID",
+                                    "appURL",
+                                    "updateOptionsAxiom",
+                                    "alias",
+                                    "logicalSchema",
+                                    "isProfilingEnabled",
+                                    "isDynamic",
+                                    "retentionVersions",
+                                    "stateStoreType"
+                                  ]
+                                },
+                                "else": {
+                                  "if": {
+                                    "properties": {
+                                      "stateStoreType": {
+                                        "const": "writeDataFrameToBigQueryTable"
+                                      }
+                                    }
+                                  },
+                                  "then": {
+                                    "type": "object",
+                                    "properties": {
+                                      "projectId": {
+                                        "type": "string"
+                                      },
+                                      "tableName": {
+                                        "type": "string"
+                                      },
+                                      "dataset": {
+                                        "type": "string"
+                                      },
+                                      "serviceAccountCredential": {
+                                        "type": "string"
+                                      },
+                                      "temporaryGcsBucketName": {
+                                        "type": "string"
+                                      },
+                                      "optional": {
+                                        "type": "object",
+                                        "properties": {
+                                          "persistDataFrame": {
+                                            "type": "boolean"
+                                          },
+                                          "addRunIdColumn": {
+                                            "type": "boolean"
+                                          },
+                                          "enableDataReconciliation": {
+                                            "type": "boolean"
+                                          },
+                                          "enforceSchema": {
+                                            "type": "boolean"
+                                          },
+                                          "enforceSchemaMethod": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "additionalProperties": true,
+                                        "required": []
+                                      },
+                                      "alias": {
+                                        "type": "string"
+                                      },
+                                      "logicalSchema": {
+                                        "type": "object",
+                                        "additionalProperties": true,
+                                        "properties": {},
+                                        "required": []
+                                      },
+                                      "isProfilingEnabled": {
+                                        "type": "boolean"
+                                      },
+                                      "isDynamic": {
+                                        "type": "boolean"
+                                      },
+                                      "retentionVersions": {
+                                        "type": "string"
+                                      },
+                                      "stateStoreType": {
+                                        "type": "string"
+                                      },
+                                      "updateStrategy": {
+                                        "type": "string"
+                                      },
+                                      "updateStrategyOptions": {
+                                        "type": "object",
+                                        "additionalProperties": true,
+                                        "properties": {},
+                                        "required": []
+                                      }
+                                    },
+                                    "required": [
+                                      "projectId",
+                                      "tableName",
+                                      "dataset",
+                                      "serviceAccountCredential",
+                                      "temporaryGcsBucketName",
+                                      "alias",
+                                      "logicalSchema",
+                                      "isProfilingEnabled",
+                                      "isDynamic",
+                                      "retentionVersions",
+                                      "stateStoreType"
+                                    ]
+                                  },
+                                  "else": {
+                                    "if": {
+                                      "properties": {
+                                        "stateStoreType": {
+                                          "const": "writeDataFrameToSnowflakeTable"
+                                        }
+                                      }
+                                    },
+                                    "then": {
+                                      "type": "object",
+                                      "properties": {
+                                        "connection": {
+                                          "type": "string"
+                                        },
+                                        "tableName": {
+                                          "type": "string"
+                                        },
+                                        "optional": {
+                                          "type": "object",
+                                          "properties": {
+                                            "persistDataFrame": {
+                                              "type": "boolean"
+                                            },
+                                            "truncateColumns": {
+                                              "type": "boolean"
+                                            },
+                                            "warehouse": {
+                                              "type": "boolean"
+                                            },
+                                            "role": {
+                                              "type": "boolean"
+                                            },
+                                            "columnMap": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "inputColumn": {
+                                                    "type": "string"
+                                                  },
+                                                  "targetColumn": {
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "additionalProperties": true,
+                                                "required": [
+                                                  "inputColumn",
+                                                  "targetColumn"
+                                                ]
+                                              }
+                                            },
+                                            "addRunIdColumn": {
+                                              "type": "boolean"
+                                            },
+                                            "enableDataReconciliation": {
+                                              "type": "boolean"
+                                            },
+                                            "enforceSchema": {
+                                              "type": "boolean"
+                                            },
+                                            "enforceSchemaMethod": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "additionalProperties": true,
+                                          "required": []
+                                        },
+                                        "alias": {
+                                          "type": "string"
+                                        },
+                                        "logicalSchema": {
+                                          "type": "object",
+                                          "additionalProperties": true,
+                                          "properties": {},
+                                          "required": []
+                                        },
+                                        "isProfilingEnabled": {
+                                          "type": "boolean"
+                                        },
+                                        "isDynamic": {
+                                          "type": "boolean"
+                                        },
+                                        "retentionVersions": {
+                                          "type": "string"
+                                        },
+                                        "stateStoreType": {
+                                          "type": "string"
+                                        },
+                                        "updateStrategy": {
+                                          "type": "string"
+                                        },
+                                        "updateStrategyOptions": {
+                                          "type": "object",
+                                          "additionalProperties": true,
+                                          "properties": {},
+                                          "required": []
+                                        }
+                                      },
+                                      "required": [
+                                        "connection",
+                                        "tableName",
+                                        "alias",
+                                        "logicalSchema",
+                                        "isProfilingEnabled",
+                                        "isDynamic",
+                                        "retentionVersions",
+                                        "stateStoreType"
+                                      ]
+                                    },
+                                    "else": {
+                                      "if": {
+                                        "properties": {
+                                          "stateStoreType": {
+                                            "const": "dataProfiling"
+                                          }
+                                        }
+                                      },
+                                      "then": {
+                                        "type": "object",
+                                        "properties": {
+                                          "tableId": {
+                                            "type": "number"
+                                          },
+                                          "optional": {
+                                            "type": "object",
+                                            "properties": {
+                                              "persistDataFrame": {
+                                                "type": "boolean"
+                                              },
+                                              "histogramThreshold": {
+                                                "type": "string"
+                                              },
+                                              "addRunIdColumn": {
+                                                "type": "boolean"
+                                              },
+                                              "enableDataReconciliation": {
+                                                "type": "boolean"
+                                              },
+                                              "enforceSchema": {
+                                                "type": "boolean"
+                                              },
+                                              "enforceSchemaMethod": {
+                                                "type": "string"
+                                              },
+                                              "criticalColumns": {
+                                                "type": "object",
+                                                "properties": {},
+                                                "patternProperties": {
+                                                  "^[0-9A-Za-z_]+": {
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "additionalProperties": true,
+                                                "required": []
+                                              }
+                                            },
+                                            "additionalProperties": true,
+                                            "required": []
+                                          },
+                                          "alias": {
+                                            "type": "string"
+                                          },
+                                          "logicalSchema": {
+                                            "type": "object",
+                                            "additionalProperties": true,
+                                            "properties": {},
+                                            "required": []
+                                          },
+                                          "isProfilingEnabled": {
+                                            "type": "boolean"
+                                          },
+                                          "isDynamic": {
+                                            "type": "boolean"
+                                          },
+                                          "retentionVersions": {
+                                            "type": "string"
+                                          },
+                                          "stateStoreType": {
+                                            "type": "string"
+                                          },
+                                          "updateStrategy": {
+                                            "type": "string"
+                                          },
+                                          "updateStrategyOptions": {
+                                            "type": "object",
+                                            "additionalProperties": true,
+                                            "properties": {},
+                                            "required": []
+                                          }
+                                        },
+                                        "required": [
+                                          "tableId",
+                                          "alias",
+                                          "logicalSchema",
+                                          "isProfilingEnabled",
+                                          "isDynamic",
+                                          "retentionVersions",
+                                          "stateStoreType"
+                                        ]
+                                      },
+                                      "else": {
+                                        "if": {
+                                          "properties": {
+                                            "stateStoreType": {
+                                              "const": "writeDataFrameToHudiTable"
+                                            }
+                                          }
+                                        },
+                                        "then": {
+                                          "type": "object",
+                                          "properties": {
+                                            "tableWritePath": {
+                                              "type": "string"
+                                            },
+                                            "tableName": {
+                                              "type": "string"
+                                            },
+                                            "keyField": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "timestampIdentifierField": {
+                                              "type": "string"
+                                            },
+                                            "hudiWriteOperationType": {
+                                              "type": "string"
+                                            },
+                                            "optional": {
+                                              "type": "object",
+                                              "properties": {
+                                                "hudiTableType": {
+                                                  "type": "string"
+                                                },
+                                                "partitionFields": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "otherConfigs": {
+                                                  "type": "object",
+                                                  "properties": {},
+                                                  "patternProperties": {
+                                                    "^[0-9A-Za-z_]+": {
+                                                      "type": "string"
+                                                    }
+                                                  },
+                                                  "additionalProperties": true,
+                                                  "required": []
+                                                },
+                                                "accessKey": {
+                                                  "type": "string"
+                                                },
+                                                "secretKey": {
+                                                  "type": "string"
+                                                },
+                                                "endPoint": {
+                                                  "type": "string"
+                                                },
+                                                "encodingType": {
+                                                  "type": "string"
+                                                },
+                                                "columnsToEncode": {
+                                                  "type": "array",
+                                                  "items": {
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "persistDataFrame": {
+                                                  "type": "boolean"
+                                                },
+                                                "enableDataReconciliation": {
+                                                  "type": "boolean"
+                                                },
+                                                "enforceSchema": {
+                                                  "type": "boolean"
+                                                },
+                                                "enforceSchemaMethod": {
+                                                  "type": "string"
+                                                },
+                                                "dynamicPartitionRequired": {
+                                                  "type": "boolean"
+                                                },
+                                                "connection": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "additionalProperties": true,
+                                              "required": []
+                                            },
+                                            "alias": {
+                                              "type": "string"
+                                            },
+                                            "logicalSchema": {
+                                              "type": "object",
+                                              "additionalProperties": true,
+                                              "properties": {},
+                                              "required": []
+                                            },
+                                            "isProfilingEnabled": {
+                                              "type": "boolean"
+                                            },
+                                            "isDynamic": {
+                                              "type": "boolean"
+                                            },
+                                            "retentionVersions": {
+                                              "type": "string"
+                                            },
+                                            "stateStoreType": {
+                                              "type": "string"
+                                            },
+                                            "updateStrategy": {
+                                              "type": "string"
+                                            },
+                                            "updateStrategyOptions": {
+                                              "type": "object",
+                                              "additionalProperties": true,
+                                              "properties": {},
+                                              "required": []
+                                            }
+                                          },
+                                          "required": [
+                                            "tableWritePath",
+                                            "tableName",
+                                            "keyField",
+                                            "timestampIdentifierField",
+                                            "hudiWriteOperationType",
+                                            "alias",
+                                            "logicalSchema",
+                                            "isProfilingEnabled",
+                                            "isDynamic",
+                                            "retentionVersions",
+                                            "stateStoreType"
+                                          ]
+                                        },
+                                        "else": {
+                                          "if": {
+                                            "properties": {
+                                              "stateStoreType": {
+                                                "const": "sendEmailUsingNotificationEngine"
+                                              }
+                                            }
+                                          },
+                                          "then": {
+                                            "type": "object",
+                                            "properties": {
+                                              "toEmail": {
+                                                "type": "string"
+                                              },
+                                              "subject": {
+                                                "type": "string"
+                                              },
+                                              "optional": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "persistDataFrame": {
+                                                    "type": "boolean"
+                                                  },
+                                                  "template": {
+                                                    "type": "string"
+                                                  },
+                                                  "ccEmailList": {
+                                                    "type": "string"
+                                                  },
+                                                  "typeOfEmail": {
+                                                    "type": "string"
+                                                  },
+                                                  "enforceSchema": {
+                                                    "type": "boolean"
+                                                  },
+                                                  "enforceSchemaMethod": {
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "additionalProperties": true,
+                                                "required": []
+                                              },
+                                              "alias": {
+                                                "type": "string"
+                                              },
+                                              "logicalSchema": {
+                                                "type": "object",
+                                                "additionalProperties": true,
+                                                "properties": {},
+                                                "required": []
+                                              },
+                                              "isProfilingEnabled": {
+                                                "type": "boolean"
+                                              },
+                                              "isDynamic": {
+                                                "type": "boolean"
+                                              },
+                                              "retentionVersions": {
+                                                "type": "string"
+                                              },
+                                              "stateStoreType": {
+                                                "type": "string"
+                                              },
+                                              "updateStrategy": {
+                                                "type": "string"
+                                              },
+                                              "updateStrategyOptions": {
+                                                "type": "object",
+                                                "additionalProperties": true,
+                                                "properties": {},
+                                                "required": []
+                                              }
+                                            },
+                                            "required": [
+                                              "toEmail",
+                                              "subject",
+                                              "alias",
+                                              "logicalSchema",
+                                              "isProfilingEnabled",
+                                              "isDynamic",
+                                              "retentionVersions",
+                                              "stateStoreType"
+                                            ]
+                                          },
+                                          "else": {
+                                            "if": {
+                                              "properties": {
+                                                "stateStoreType": {
+                                                  "const": "queryExecuteUpdateBigQuery"
+                                                }
+                                              }
+                                            },
+                                            "then": {
+                                              "type": "object",
+                                              "properties": {
+                                                "query": {
+                                                  "type": "string"
+                                                },
+                                                "projectId": {
+                                                  "type": "string"
+                                                },
+                                                "serviceAccountCredential": {
+                                                  "type": "string"
+                                                },
+                                                "optional": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "persistDataFrame": {
+                                                      "type": "boolean"
+                                                    },
+                                                    "enforceSchema": {
+                                                      "type": "boolean"
+                                                    },
+                                                    "enforceSchemaMethod": {
+                                                      "type": "string"
+                                                    }
+                                                  },
+                                                  "additionalProperties": true,
+                                                  "required": []
+                                                },
+                                                "alias": {
+                                                  "type": "string"
+                                                },
+                                                "logicalSchema": {
+                                                  "type": "object",
+                                                  "additionalProperties": true,
+                                                  "properties": {},
+                                                  "required": []
+                                                },
+                                                "isProfilingEnabled": {
+                                                  "type": "boolean"
+                                                },
+                                                "isDynamic": {
+                                                  "type": "boolean"
+                                                },
+                                                "retentionVersions": {
+                                                  "type": "string"
+                                                },
+                                                "stateStoreType": {
+                                                  "type": "string"
+                                                },
+                                                "updateStrategy": {
+                                                  "type": "string"
+                                                },
+                                                "updateStrategyOptions": {
+                                                  "type": "object",
+                                                  "additionalProperties": true,
+                                                  "properties": {},
+                                                  "required": []
+                                                }
+                                              },
+                                              "required": [
+                                                "query",
+                                                "projectId",
+                                                "serviceAccountCredential",
+                                                "alias",
+                                                "logicalSchema",
+                                                "isProfilingEnabled",
+                                                "isDynamic",
+                                                "retentionVersions",
+                                                "stateStoreType"
+                                              ]
+                                            },
+                                            "else": {
+                                              "if": {
+                                                "properties": {
+                                                  "stateStoreType": {
+                                                    "const": "deleteInsertDataToTable"
+                                                  }
+                                                }
+                                              },
+                                              "then": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "connection": {
+                                                    "type": "string"
+                                                  },
+                                                  "tableName": {
+                                                    "type": "string"
+                                                  },
+                                                  "optional": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "persistDataFrame": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "dbServerType": {
+                                                        "type": "string"
+                                                      },
+                                                      "temporaryPathS3": {
+                                                        "type": "string"
+                                                      },
+                                                      "addRunIdColumn": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "enableDataReconciliation": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "enforceSchema": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "enforceSchemaMethod": {
+                                                        "type": "string"
+                                                      },
+                                                      "isUser": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "awsIAMRole": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "additionalProperties": true,
+                                                    "required": []
+                                                  },
+                                                  "alias": {
+                                                    "type": "string"
+                                                  },
+                                                  "logicalSchema": {
+                                                    "type": "object",
+                                                    "additionalProperties": true,
+                                                    "properties": {},
+                                                    "required": []
+                                                  },
+                                                  "isProfilingEnabled": {
+                                                    "type": "boolean"
+                                                  },
+                                                  "isDynamic": {
+                                                    "type": "boolean"
+                                                  },
+                                                  "retentionVersions": {
+                                                    "type": "string"
+                                                  },
+                                                  "stateStoreType": {
+                                                    "type": "string"
+                                                  },
+                                                  "updateStrategy": {
+                                                    "type": "string"
+                                                  },
+                                                  "updateStrategyOptions": {
+                                                    "type": "object",
+                                                    "additionalProperties": true,
+                                                    "properties": {},
+                                                    "required": []
+                                                  }
+                                                },
+                                                "required": [
+                                                  "connection",
+                                                  "tableName",
+                                                  "alias",
+                                                  "logicalSchema",
+                                                  "isProfilingEnabled",
+                                                  "isDynamic",
+                                                  "retentionVersions",
+                                                  "stateStoreType"
+                                                ]
+                                              },
+                                              "else": {
+                                                "if": {
+                                                  "properties": {
+                                                    "stateStoreType": {
+                                                      "const": "loadDataIceberg"
+                                                    }
+                                                  }
+                                                },
+                                                "then": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "tableName": {
+                                                      "type": "string"
+                                                    },
+                                                    "warehousePath": {
+                                                      "type": "string"
+                                                    },
+                                                    "catalogName": {
+                                                      "type": "string"
+                                                    },
+                                                    "optional": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "persistDataFrame": {
+                                                          "type": "boolean"
+                                                        },
+                                                        "enableDataReconciliation": {
+                                                          "type": "boolean"
+                                                        },
+                                                        "enforceSchema": {
+                                                          "type": "boolean"
+                                                        },
+                                                        "enforceSchemaMethod": {
+                                                          "type": "string"
+                                                        },
+                                                        "catalogType": {
+                                                          "type": "string"
+                                                        },
+                                                        "changeTrackingColumns": {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "string"
+                                                          }
+                                                        },
+                                                        "encodingType": {
+                                                          "type": "string"
+                                                        },
+                                                        "columnsToEncode": {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "string"
+                                                          }
+                                                        },
+                                                        "timestampColumn": {
+                                                          "type": "string"
+                                                        },
+                                                        "primaryKey": {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "string"
+                                                          }
+                                                        },
+                                                        "partitionColumns": {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "string"
+                                                          }
+                                                        },
+                                                        "connection": {
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "additionalProperties": true,
+                                                      "required": []
+                                                    },
+                                                    "alias": {
+                                                      "type": "string"
+                                                    },
+                                                    "logicalSchema": {
+                                                      "type": "object",
+                                                      "additionalProperties": true,
+                                                      "properties": {},
+                                                      "required": []
+                                                    },
+                                                    "isProfilingEnabled": {
+                                                      "type": "boolean"
+                                                    },
+                                                    "isDynamic": {
+                                                      "type": "boolean"
+                                                    },
+                                                    "retentionVersions": {
+                                                      "type": "string"
+                                                    },
+                                                    "stateStoreType": {
+                                                      "type": "string"
+                                                    },
+                                                    "updateStrategy": {
+                                                      "type": "string"
+                                                    },
+                                                    "updateStrategyOptions": {
+                                                      "type": "object",
+                                                      "additionalProperties": true,
+                                                      "properties": {},
+                                                      "required": []
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "tableName",
+                                                    "warehousePath",
+                                                    "catalogName",
+                                                    "alias",
+                                                    "logicalSchema",
+                                                    "isProfilingEnabled",
+                                                    "isDynamic",
+                                                    "retentionVersions",
+                                                    "stateStoreType"
+                                                  ]
+                                                },
+                                                "else": {
+                                                  "if": {
+                                                    "properties": {
+                                                      "stateStoreType": {
+                                                        "const": "stateManagement"
+                                                      }
+                                                    }
+                                                  },
+                                                  "then": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "tableName": {
+                                                        "type": "string"
+                                                      },
+                                                      "warehousePath": {
+                                                        "type": "string"
+                                                      },
+                                                      "catalogName": {
+                                                        "type": "string"
+                                                      },
+                                                      "stateType": {
+                                                        "type": "string"
+                                                      },
+                                                      "stateName": {
+                                                        "type": "string"
+                                                      },
+                                                      "optional": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "encodingType": {
+                                                            "type": "string"
+                                                          },
+                                                          "columnsToEncode": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "string"
+                                                            }
+                                                          },
+                                                          "partitionColumns": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "string"
+                                                            }
+                                                          },
+                                                          "primaryKey": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "string"
+                                                            }
+                                                          },
+                                                          "changeTrackingColumns": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "string"
+                                                            }
+                                                          },
+                                                          "timestampColumn": {
+                                                            "type": "string"
+                                                          },
+                                                          "advanceOptions": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                              "endPoint": {
+                                                                "type": "string"
+                                                              },
+                                                              "accessKey": {
+                                                                "type": "string"
+                                                              },
+                                                              "secretKey": {
+                                                                "type": "string"
+                                                              }
+                                                            },
+                                                            "additionalProperties": true,
+                                                            "required": [
+                                                              "endPoint",
+                                                              "accessKey",
+                                                              "secretKey"
+                                                            ]
+                                                          },
+                                                          "persistDataFrame": {
+                                                            "type": "boolean"
+                                                          }
+                                                        },
+                                                        "additionalProperties": true,
+                                                        "required": []
+                                                      },
+                                                      "alias": {
+                                                        "type": "string"
+                                                      },
+                                                      "logicalSchema": {
+                                                        "type": "object",
+                                                        "additionalProperties": true,
+                                                        "properties": {},
+                                                        "required": []
+                                                      },
+                                                      "isProfilingEnabled": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "isDynamic": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "retentionVersions": {
+                                                        "type": "string"
+                                                      },
+                                                      "stateStoreType": {
+                                                        "type": "string"
+                                                      },
+                                                      "updateStrategy": {
+                                                        "type": "string"
+                                                      },
+                                                      "updateStrategyOptions": {
+                                                        "type": "object",
+                                                        "additionalProperties": true,
+                                                        "properties": {},
+                                                        "required": []
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "tableName",
+                                                      "warehousePath",
+                                                      "catalogName",
+                                                      "stateType",
+                                                      "stateName",
+                                                      "alias",
+                                                      "logicalSchema",
+                                                      "isProfilingEnabled",
+                                                      "isDynamic",
+                                                      "retentionVersions",
+                                                      "stateStoreType"
+                                                    ]
+                                                  },
+                                                  "else": {
+                                                    "if": {
+                                                      "properties": {
+                                                        "stateStoreType": {
+                                                          "const": "writeDataFrameToDeltaTable"
+                                                        }
+                                                      }
+                                                    },
+                                                    "then": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "tableWritePath": {
+                                                          "type": "string"
+                                                        },
+                                                        "optional": {
+                                                          "type": "object",
+                                                          "properties": {
+                                                            "primaryKey": {
+                                                              "type": "string"
+                                                            },
+                                                            "timestampColumn": {
+                                                              "type": "string"
+                                                            },
+                                                            "changeTrackingColumns": {
+                                                              "type": "array",
+                                                              "items": {
+                                                                "type": "string"
+                                                              }
+                                                            },
+                                                            "partitionColumns": {
+                                                              "type": "array",
+                                                              "items": {
+                                                                "type": "string"
+                                                              }
+                                                            },
+                                                            "persistDataFrame": {
+                                                              "type": "boolean"
+                                                            },
+                                                            "encodingType": {
+                                                              "type": "string"
+                                                            },
+                                                            "columnsToEncode": {
+                                                              "type": "array",
+                                                              "items": {
+                                                                "type": "string"
+                                                              }
+                                                            },
+                                                            "enableDataReconciliation": {
+                                                              "type": "boolean"
+                                                            },
+                                                            "enforceSchema": {
+                                                              "type": "boolean"
+                                                            },
+                                                            "enforceSchemaMethod": {
+                                                              "type": "string"
+                                                            },
+                                                            "connection": {
+                                                              "type": "string"
+                                                            }
+                                                          },
+                                                          "additionalProperties": true,
+                                                          "required": []
+                                                        },
+                                                        "alias": {
+                                                          "type": "string"
+                                                        },
+                                                        "logicalSchema": {
+                                                          "type": "object",
+                                                          "additionalProperties": true,
+                                                          "properties": {},
+                                                          "required": []
+                                                        },
+                                                        "isProfilingEnabled": {
+                                                          "type": "boolean"
+                                                        },
+                                                        "isDynamic": {
+                                                          "type": "boolean"
+                                                        },
+                                                        "retentionVersions": {
+                                                          "type": "string"
+                                                        },
+                                                        "stateStoreType": {
+                                                          "type": "string"
+                                                        },
+                                                        "updateStrategy": {
+                                                          "type": "string"
+                                                        },
+                                                        "updateStrategyOptions": {
+                                                          "type": "object",
+                                                          "additionalProperties": true,
+                                                          "properties": {},
+                                                          "required": []
+                                                        }
+                                                      },
+                                                      "required": [
+                                                        "tableWritePath",
+                                                        "alias",
+                                                        "logicalSchema",
+                                                        "isProfilingEnabled",
+                                                        "isDynamic",
+                                                        "retentionVersions",
+                                                        "stateStoreType"
+                                                      ]
+                                                    },
+                                                    "else": {}
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "s3CsvDataSet",
+  "type": "object",
+  "properties": {
+    "delimiter": {
+      "type": "string"
+    },
+    "header": {
+      "type": "string"
+    },
+    "charset": {
+      "type": "string"
+    },
+    "multiline": {
+      "type": "boolean"
+    },
+    "inferSchema": {
+      "type": "boolean"
+    },
+    "mode": {
+      "type": "string"
+    },
+    "nullValue": {
+      "type": "string"
+    },
+    "escape": {
+      "type": "string"
+    },
+    "quote": {
+      "type": "string"
+    },
+    "ignoreLeadingWhiteSpace": {
+      "type": "boolean"
+    },
+    "ignoreTrailingWhiteSpace": {
+      "type": "boolean"
+    },
+    "enforceSchema": {
+      "type": "boolean"
+    },
+    "timestampFormat": {
+      "type": "string"
+    },
+    "emptyValue": {
+      "type": "string"
+    },
+    "nanValue": {
+      "type": "string"
+    },
+    "columnNameOfCorruptRecord": {
+      "type": "string"
+    },
+    "dateFormat": {
+      "type": "string"
+    },
+    "maxColumns": {
+      "type": "string"
+    },
+    "maxCharsPerColumn": {
+      "type": "string"
+    },
+    "samplingRatio": {
+      "type": "string"
+    },
+    "comment": {
+      "type": "string"
+    },
+    "charToEscapeQuoteEscaping": {
+      "type": "string"
+    },
+    "positiveInf": {
+      "type": "string"
+    },
+    "negativeInf": {
+      "type": "string"
+    }
+  }
+}

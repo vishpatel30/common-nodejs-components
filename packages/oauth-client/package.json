@@ -1,0 +1,36 @@
+{
+  "name": "@dataverse/oauth-client",
+  "version": "0.0.2",
+  "description": "NodeJS OAuth Client",
+  "homepage": "https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components#readme",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components.git"
+  },
+  "scripts": {
+    "test": "jest -c ../../jest.config.js",
+    "build": "tsc",
+    "clean": "rm -r ./dist"
+  },
+  "bugs": {
+    "url": "https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components/issues"
+  },
+  "devDependencies": {
+    "@types/cache-manager": "^3.4.3",
+    "nock": "^13.2.4"
+  },
+  "dependencies": {
+    "@dataverse/errors": "^0.0.5",
+    "@dataverse/http-resilient-executor": "^0.0.1",
+    "@dataverse/logger": "^0.0.2",
+    "axios": "^0.24.0",
+    "cache-manager": "^3.6.1",
+    "http-status": "~1.5.0"
+  },
+  "gitHead": "411e41f5e94703b0ee0bf93df4a39d919c76bf92"
+}

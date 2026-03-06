@@ -1,0 +1,34 @@
+{
+  "name": "@dataverse/keycloak-provider",
+  "version": "0.0.9",
+  "description": "NodeJS Dataverse KeyCloak Provider",
+  "homepage": "https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components#readme",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -r ./dist"
+  },
+  "bugs": {
+    "url": "https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components/issues"
+  },
+  "dependencies": {
+    "@dataverse/errors": "^0.0.5",
+    "@dataverse/logger": "^0.0.2",
+    "@types/node": "^20.4.2",
+    "axios": "^1.4.0",
+    "http-status": "^1.5.0",
+    "qs": "^6.11.2"
+  },
+  "gitHead": "411e41f5e94703b0ee0bf93df4a39d919c76bf92",
+  "devDependencies": {
+    "@types/qs": "^6.9.7"
+  }
+}

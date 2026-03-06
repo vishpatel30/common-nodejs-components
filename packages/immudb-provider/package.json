@@ -1,0 +1,29 @@
+{
+  "name": "@dataverse/immudb-provider",
+  "version": "0.0.1",
+  "description": "NodeJS Byteverse Immudb Provider",
+  "homepage": "https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components#readme",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -r ./dist"
+  },
+  "bugs": {
+    "url": "https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components/issues"
+  },
+  "dependencies": {
+    "@dataverse/logger": "^0.0.2",
+    "immudb-node": "^1.1.1"
+  },
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
+}

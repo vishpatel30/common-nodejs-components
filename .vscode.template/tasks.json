@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "label": "typescript",
+  "tasks": [
+    {
+      "label": "api-typescript",
+      "type": "shell",
+      "command": "npm run build",
+      "problemMatcher": "$tsc",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

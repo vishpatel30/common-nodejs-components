@@ -1,0 +1,35 @@
+{
+  "name": "@dataverse/developer-workbench-config",
+  "version": "0.0.15",
+  "description": "developer-workbench-config",
+  "homepage": "https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components#readme",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components.git"
+  },
+  "bugs": {
+    "url": "https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components/issues"
+  },
+  "author": "accenture",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/lodash": "^4.14.198",
+    "@types/node": "^18.11.19",
+    "ts-node": "^10.9.1"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "gitHead": "d04d63f60bcaf1824075ec52e023205de0d5f4ae",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}

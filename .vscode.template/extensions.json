@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "msjsdiag.debugger-for-chrome",
+    "streetsidesoftware.code-spell-checker",
+    "ms-azuretools.vscode-docker",
+    "ecmel.vscode-html-css",
+    "zignd.html-css-class-completion",
+    "davidanson.vscode-markdownlint",
+    "christian-kohler.path-intellisense",
+    "esbenp.prettier-vscode",
+    "redhat.vscode-yaml"
+  ]
+}

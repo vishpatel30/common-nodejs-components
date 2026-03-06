@@ -1,0 +1,33 @@
+{
+  "name": "@dataverse/manifest-schema-definition",
+  "version": "0.1.12",
+  "description": "Manifest schema definition",
+  "scripts": {
+    "build": "ts-node src/manifest/manifest-productStateMaker.ts && ts-node src/manifest/manifest-inputPortMaker.ts && ts-node src/manifest/manifest-transformationMaker.ts  && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components.git"
+  },
+  "author": "maf",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.11.19",
+    "ts-node": "^10.9.1"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "src/manifest/**/*.json"
+  ],
+  "gitHead": "d04d63f60bcaf1824075ec52e023205de0d5f4ae",
+  "dependencies": {
+    "@dataverse/developer-workbench-config": "^0.0.15",
+    "fs": "^0.0.1-security",
+    "lodash": "^4.17.21"
+  }
+}

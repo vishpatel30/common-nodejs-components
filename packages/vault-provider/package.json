@@ -1,0 +1,33 @@
+{
+  "name": "@dataverse/vault-provider",
+  "version": "0.0.8",
+  "description": "NodeJS dataverse Vault Provider",
+  "homepage": "https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components#readme",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components.git"
+  },
+  "scripts": {
+    "test": "jest -c ../../jest.config.js",
+    "build": "tsc",
+    "clean": "rm -r ./dist"
+  },
+  "bugs": {
+    "url": "https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components/issues"
+  },
+  "dependencies": {
+    "@dataverse/errors": "^0.0.5",
+    "@dataverse/logger": "^0.0.2",
+    "http-status": "^1.5.0",
+    "node-vault": "^0.9.22"
+  },
+  "devDependencies": {
+    "@types/request": "^2.48.8"
+  },
+  "gitHead": "411e41f5e94703b0ee0bf93df4a39d919c76bf92"
+}

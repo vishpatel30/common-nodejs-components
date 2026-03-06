@@ -1,0 +1,1870 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "inputPort",
+  "type": "array",
+  "title": "Input Port",
+  "description": "Input Port definition",
+  "items": {
+    "if": {
+      "not": {
+        "type": "object",
+        "properties": {
+          "isDynamic": {
+            "const": true
+          }
+        }
+      }
+    },
+    "then": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "s3-csv"
+              ]
+            },
+            "alias": {
+              "$ref": "alias"
+            },
+            "description": {
+              "type": "string",
+              "maxLength": 600
+            },
+            "tags": {
+              "$ref": "tags"
+            },
+            "syncType": {
+              "$ref": "syncType"
+            },
+            "dataSetUrn": {
+              "$ref": "dataSetUrn"
+            },
+            "filter": {
+              "type": "string"
+            },
+            "projection": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "incrementalLoad": {
+              "type": "boolean"
+            },
+            "incrementalStrategy": {
+              "$ref": "incrementalStrategy"
+            }
+          },
+          "required": [
+            "type",
+            "alias",
+            "dataSetUrn"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "s3-parquet"
+              ]
+            },
+            "alias": {
+              "$ref": "alias"
+            },
+            "description": {
+              "type": "string",
+              "maxLength": 600
+            },
+            "tags": {
+              "$ref": "tags"
+            },
+            "syncType": {
+              "$ref": "syncType"
+            },
+            "dataSetUrn": {
+              "$ref": "dataSetUrn"
+            },
+            "filter": {
+              "type": "string"
+            },
+            "projection": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "incrementalLoad": {
+              "type": "boolean"
+            },
+            "incrementalStrategy": {
+              "$ref": "incrementalStrategy"
+            }
+          },
+          "required": [
+            "type",
+            "alias",
+            "dataSetUrn"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "s3-json"
+              ]
+            },
+            "alias": {
+              "$ref": "alias"
+            },
+            "description": {
+              "type": "string",
+              "maxLength": 600
+            },
+            "tags": {
+              "$ref": "tags"
+            },
+            "syncType": {
+              "$ref": "syncType"
+            },
+            "dataSetUrn": {
+              "$ref": "dataSetUrn"
+            },
+            "filter": {
+              "type": "string"
+            },
+            "projection": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "incrementalLoad": {
+              "type": "boolean"
+            },
+            "incrementalStrategy": {
+              "$ref": "incrementalStrategy"
+            }
+          },
+          "required": [
+            "type",
+            "alias",
+            "dataSetUrn"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "vertica-table",
+                "postgres-table"
+              ]
+            },
+            "alias": {
+              "$ref": "alias"
+            },
+            "description": {
+              "type": "string",
+              "maxLength": 600
+            },
+            "tags": {
+              "$ref": "tags"
+            },
+            "syncType": {
+              "$ref": "syncType"
+            },
+            "dataSetUrn": {
+              "$ref": "dataSetUrn"
+            },
+            "filter": {
+              "type": "string"
+            },
+            "projection": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "incrementalLoad": {
+              "type": "boolean"
+            },
+            "incrementalStrategy": {
+              "$ref": "incrementalStrategy"
+            }
+          },
+          "required": [
+            "type",
+            "alias",
+            "dataSetUrn"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "dataproduct"
+              ]
+            },
+            "alias": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 500,
+              "pattern": "^[A-Za-z0-9_]+$"
+            },
+            "description": {
+              "type": "string",
+              "maxLength": 600
+            },
+            "tags": {
+              "$ref": "tags"
+            },
+            "syncType": {
+              "$ref": "syncType"
+            },
+            "dataProductUrn": {
+              "type": "string",
+              "pattern": "^(?:urn|URN):(?:dv|DV):dataproduct:[A-Za-z0-9\\-_]+$",
+              "description": ""
+            },
+            "filter": {
+              "type": "string"
+            },
+            "projection": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "alias",
+            "dataProductUrn",
+            "type"
+          ]
+        }
+      ]
+    },
+    "else": {
+      "if": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "inputParquet"
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "optional": {
+            "type": "object",
+            "properties": {
+              "persistDataFrame": {
+                "type": "boolean"
+              },
+              "columnsToDecrypt": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "advanceOptions": {
+                "type": "object",
+                "properties": {
+                  "mergeSchema": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": true,
+                "required": []
+              },
+              "enableDataReconciliation": {
+                "type": "boolean"
+              },
+              "enforceSchema": {
+                "type": "boolean"
+              },
+              "enforceSchemaMethod": {
+                "type": "string"
+              },
+              "connection": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true,
+            "required": []
+          },
+          "alias": {
+            "type": "string"
+          },
+          "isDynamic": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "type",
+          "path",
+          "alias",
+          "isDynamic"
+        ]
+      },
+      "else": {
+        "if": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "inputDelimited"
+            }
+          }
+        },
+        "then": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "optional": {
+              "type": "object",
+              "properties": {
+                "persistDataFrame": {
+                  "type": "boolean"
+                },
+                "columnsToDecrypt": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "advanceOptions": {
+                  "type": "object",
+                  "properties": {
+                    "header": {
+                      "type": "boolean"
+                    },
+                    "delimiter": {
+                      "type": "string"
+                    },
+                    "charset": {
+                      "type": "string"
+                    },
+                    "multiline": {
+                      "type": "boolean"
+                    },
+                    "inferSchema": {
+                      "type": "boolean"
+                    },
+                    "mode": {
+                      "type": "string"
+                    },
+                    "nullValue": {
+                      "type": "string"
+                    },
+                    "escape": {
+                      "type": "string"
+                    },
+                    "quote": {
+                      "type": "string"
+                    },
+                    "ignoreLeadingWhiteSpace": {
+                      "type": "boolean"
+                    },
+                    "ignoreTrailingWhiteSpace": {
+                      "type": "boolean"
+                    },
+                    "enforceSchema": {
+                      "type": "boolean"
+                    },
+                    "timestampFormat": {
+                      "type": "string"
+                    },
+                    "emptyValue": {
+                      "type": "string"
+                    },
+                    "nanValue": {
+                      "type": "string"
+                    },
+                    "columnNameOfCorruptRecord": {
+                      "type": "string"
+                    },
+                    "dateFormat": {
+                      "type": "string"
+                    },
+                    "maxColumns": {
+                      "type": "string"
+                    },
+                    "maxCharsPerColumn": {
+                      "type": "string"
+                    },
+                    "samplingRatio": {
+                      "type": "string"
+                    },
+                    "comment": {
+                      "type": "string"
+                    },
+                    "charToEscapeQuoteEscaping": {
+                      "type": "string"
+                    },
+                    "positiveInf": {
+                      "type": "string"
+                    },
+                    "negativeInf": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": true,
+                  "required": []
+                },
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "dataType": {
+                        "type": "string"
+                      },
+                      "nullable": {
+                        "type": "boolean"
+                      }
+                    },
+                    "additionalProperties": true,
+                    "required": [
+                      "name",
+                      "dataType",
+                      "nullable"
+                    ]
+                  }
+                },
+                "enableDataReconciliation": {
+                  "type": "boolean"
+                },
+                "enforceSchema": {
+                  "type": "boolean"
+                },
+                "enforceSchemaMethod": {
+                  "type": "string"
+                },
+                "connection": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": true,
+              "required": []
+            },
+            "alias": {
+              "type": "string"
+            },
+            "isDynamic": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "path",
+            "alias",
+            "isDynamic"
+          ]
+        },
+        "else": {
+          "if": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "readMySqlDbUsingJdbc"
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "connection": {
+                "type": "string"
+              },
+              "tableName/query": {
+                "type": "string"
+              },
+              "optional": {
+                "type": "object",
+                "properties": {
+                  "persistDataFrame": {
+                    "type": "boolean"
+                  },
+                  "primaryKey": {
+                    "type": "string"
+                  },
+                  "numRepartitions": {
+                    "type": "string"
+                  },
+                  "enableDataReconciliation": {
+                    "type": "boolean"
+                  },
+                  "enforceSchema": {
+                    "type": "boolean"
+                  },
+                  "enforceSchemaMethod": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": true,
+                "required": []
+              },
+              "alias": {
+                "type": "string"
+              },
+              "isDynamic": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "connection",
+              "tableName/query",
+              "alias",
+              "isDynamic"
+            ]
+          },
+          "else": {
+            "if": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "inputXLS"
+                }
+              }
+            },
+            "then": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "sheetNames": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "cellAddress": {
+                  "type": "string"
+                },
+                "optional": {
+                  "type": "object",
+                  "properties": {
+                    "persistDataFrame": {
+                      "type": "boolean"
+                    },
+                    "advanceOptions": {
+                      "type": "object",
+                      "properties": {
+                        "treatEmptyValuesAsNulls": {
+                          "type": "string"
+                        },
+                        "addColorColumns": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": true,
+                      "required": [
+                        "treatEmptyValuesAsNulls",
+                        "addColorColumns"
+                      ]
+                    },
+                    "enableDataReconciliation": {
+                      "type": "boolean"
+                    },
+                    "enforceSchema": {
+                      "type": "boolean"
+                    },
+                    "enforceSchemaMethod": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": true,
+                  "required": []
+                },
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "columnName": {
+                        "type": "string"
+                      },
+                      "dataType": {
+                        "type": "string"
+                      },
+                      "nullable": {
+                        "type": "boolean"
+                      }
+                    },
+                    "additionalProperties": true,
+                    "required": [
+                      "columnName",
+                      "dataType",
+                      "nullable"
+                    ]
+                  }
+                },
+                "alias": {
+                  "type": "string"
+                },
+                "isDynamic": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "path",
+                "sheetNames",
+                "cellAddress",
+                "alias",
+                "isDynamic"
+              ]
+            },
+            "else": {
+              "if": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "const": "inputXML"
+                  }
+                }
+              },
+              "then": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  },
+                  "rowTag": {
+                    "type": "string"
+                  },
+                  "rootTag": {
+                    "type": "string"
+                  },
+                  "optional": {
+                    "type": "object",
+                    "properties": {
+                      "persistDataFrame": {
+                        "type": "boolean"
+                      },
+                      "advanceOptions": {
+                        "type": "object",
+                        "properties": {
+                          "treatEmptyValuesAsNulls": {
+                            "type": "boolean"
+                          },
+                          "ignoreSurroundingSpaces": {
+                            "type": "boolean"
+                          },
+                          "excludeAttribute": {
+                            "type": "boolean"
+                          },
+                          "charset": {
+                            "type": "string"
+                          },
+                          "attributePrefix": {
+                            "type": "string"
+                          },
+                          "valueTag": {
+                            "type": "string"
+                          },
+                          "columnNameOfCorruptRecord": {
+                            "type": "string"
+                          },
+                          "multiline": {
+                            "type": "boolean"
+                          }
+                        },
+                        "additionalProperties": true,
+                        "required": []
+                      },
+                      "enableDataReconciliation": {
+                        "type": "boolean"
+                      },
+                      "enforceSchema": {
+                        "type": "boolean"
+                      },
+                      "enforceSchemaMethod": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": true,
+                    "required": []
+                  },
+                  "alias": {
+                    "type": "string"
+                  },
+                  "isDynamic": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "path",
+                  "rowTag",
+                  "rootTag",
+                  "alias",
+                  "isDynamic"
+                ]
+              },
+              "else": {
+                "if": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "const": "inputJson"
+                    }
+                  }
+                },
+                "then": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string"
+                    },
+                    "optional": {
+                      "type": "object",
+                      "properties": {
+                        "persistDataFrame": {
+                          "type": "boolean"
+                        },
+                        "mode": {
+                          "type": "boolean"
+                        },
+                        "enableDataReconciliation": {
+                          "type": "boolean"
+                        },
+                        "enforceSchema": {
+                          "type": "boolean"
+                        },
+                        "enforceSchemaMethod": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": true,
+                      "required": []
+                    },
+                    "alias": {
+                      "type": "string"
+                    },
+                    "isDynamic": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "alias",
+                    "isDynamic"
+                  ]
+                },
+                "else": {
+                  "if": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "inputHive"
+                      }
+                    }
+                  },
+                  "then": {
+                    "type": "object",
+                    "properties": {
+                      "dataQuery": {
+                        "type": "string"
+                      },
+                      "optional": {
+                        "type": "object",
+                        "properties": {
+                          "persistDataFrame": {
+                            "type": "boolean"
+                          },
+                          "enableDataReconciliation": {
+                            "type": "boolean"
+                          },
+                          "enforceSchema": {
+                            "type": "boolean"
+                          },
+                          "enforceSchemaMethod": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": true,
+                        "required": []
+                      },
+                      "alias": {
+                        "type": "string"
+                      },
+                      "isDynamic": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "dataQuery",
+                      "alias",
+                      "isDynamic"
+                    ]
+                  },
+                  "else": {
+                    "if": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "readDB2DbUsingJdbc"
+                        }
+                      }
+                    },
+                    "then": {
+                      "type": "object",
+                      "properties": {
+                        "connection": {
+                          "type": "string"
+                        },
+                        "tableName/query": {
+                          "type": "string"
+                        },
+                        "optional": {
+                          "type": "object",
+                          "properties": {
+                            "persistDataFrame": {
+                              "type": "boolean"
+                            },
+                            "primaryKey": {
+                              "type": "string"
+                            },
+                            "numRepartitions": {
+                              "type": "string"
+                            },
+                            "enableDataReconciliation": {
+                              "type": "boolean"
+                            },
+                            "enforceSchema": {
+                              "type": "boolean"
+                            },
+                            "enforceSchemaMethod": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": true,
+                          "required": []
+                        },
+                        "alias": {
+                          "type": "string"
+                        },
+                        "isDynamic": {
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "connection",
+                        "tableName/query",
+                        "alias",
+                        "isDynamic"
+                      ]
+                    },
+                    "else": {
+                      "if": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "const": "readPostGreSqlDbUsingJdbc"
+                          }
+                        }
+                      },
+                      "then": {
+                        "type": "object",
+                        "properties": {
+                          "connection": {
+                            "type": "string"
+                          },
+                          "tableName/query": {
+                            "type": "string"
+                          },
+                          "optional": {
+                            "type": "object",
+                            "properties": {
+                              "persistDataFrame": {
+                                "type": "boolean"
+                              },
+                              "primaryKey": {
+                                "type": "string"
+                              },
+                              "numRepartitions": {
+                                "type": "string"
+                              },
+                              "enableDataReconciliation": {
+                                "type": "boolean"
+                              },
+                              "enforceSchema": {
+                                "type": "boolean"
+                              },
+                              "enforceSchemaMethod": {
+                                "type": "string"
+                              }
+                            },
+                            "additionalProperties": true,
+                            "required": []
+                          },
+                          "alias": {
+                            "type": "string"
+                          },
+                          "isDynamic": {
+                            "type": "boolean"
+                          }
+                        },
+                        "required": [
+                          "connection",
+                          "tableName/query",
+                          "alias",
+                          "isDynamic"
+                        ]
+                      },
+                      "else": {
+                        "if": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "const": "readOracleDbUsingJdbc"
+                            }
+                          }
+                        },
+                        "then": {
+                          "type": "object",
+                          "properties": {
+                            "connection": {
+                              "type": "string"
+                            },
+                            "tableName/query": {
+                              "type": "string"
+                            },
+                            "optional": {
+                              "type": "object",
+                              "properties": {
+                                "persistDataFrame": {
+                                  "type": "boolean"
+                                },
+                                "primaryKey": {
+                                  "type": "string"
+                                },
+                                "numRepartitions": {
+                                  "type": "string"
+                                },
+                                "enableDataReconciliation": {
+                                  "type": "boolean"
+                                },
+                                "enforceSchema": {
+                                  "type": "boolean"
+                                },
+                                "enforceSchemaMethod": {
+                                  "type": "string"
+                                }
+                              },
+                              "additionalProperties": true,
+                              "required": []
+                            },
+                            "alias": {
+                              "type": "string"
+                            },
+                            "isDynamic": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "connection",
+                            "tableName/query",
+                            "alias",
+                            "isDynamic"
+                          ]
+                        },
+                        "else": {
+                          "if": {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "const": "readSybaseDbUsingJdbc"
+                              }
+                            }
+                          },
+                          "then": {
+                            "type": "object",
+                            "properties": {
+                              "connection": {
+                                "type": "string"
+                              },
+                              "tableName/query": {
+                                "type": "string"
+                              },
+                              "optional": {
+                                "type": "object",
+                                "properties": {
+                                  "persistDataFrame": {
+                                    "type": "boolean"
+                                  },
+                                  "primaryKey": {
+                                    "type": "string"
+                                  },
+                                  "numRepartitions": {
+                                    "type": "string"
+                                  },
+                                  "enableDataReconciliation": {
+                                    "type": "boolean"
+                                  },
+                                  "enforceSchema": {
+                                    "type": "boolean"
+                                  },
+                                  "enforceSchemaMethod": {
+                                    "type": "string"
+                                  }
+                                },
+                                "additionalProperties": true,
+                                "required": []
+                              },
+                              "alias": {
+                                "type": "string"
+                              },
+                              "isDynamic": {
+                                "type": "boolean"
+                              }
+                            },
+                            "required": [
+                              "connection",
+                              "tableName/query",
+                              "alias",
+                              "isDynamic"
+                            ]
+                          },
+                          "else": {
+                            "if": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "const": "readMsSqlServerDbUsingJdbc"
+                                }
+                              }
+                            },
+                            "then": {
+                              "type": "object",
+                              "properties": {
+                                "connection": {
+                                  "type": "string"
+                                },
+                                "tableName/query": {
+                                  "type": "string"
+                                },
+                                "optional": {
+                                  "type": "object",
+                                  "properties": {
+                                    "persistDataFrame": {
+                                      "type": "boolean"
+                                    },
+                                    "primaryKey": {
+                                      "type": "string"
+                                    },
+                                    "numRepartitions": {
+                                      "type": "string"
+                                    },
+                                    "enableDataReconciliation": {
+                                      "type": "boolean"
+                                    },
+                                    "enforceSchema": {
+                                      "type": "boolean"
+                                    },
+                                    "enforceSchemaMethod": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "additionalProperties": true,
+                                  "required": []
+                                },
+                                "alias": {
+                                  "type": "string"
+                                },
+                                "isDynamic": {
+                                  "type": "boolean"
+                                }
+                              },
+                              "required": [
+                                "connection",
+                                "tableName/query",
+                                "alias",
+                                "isDynamic"
+                              ]
+                            },
+                            "else": {
+                              "if": {
+                                "type": "object",
+                                "properties": {
+                                  "type": {
+                                    "const": "readSAPHANAUsingJdbc"
+                                  }
+                                }
+                              },
+                              "then": {
+                                "type": "object",
+                                "properties": {
+                                  "connection": {
+                                    "type": "string"
+                                  },
+                                  "tableName/query": {
+                                    "type": "string"
+                                  },
+                                  "optional": {
+                                    "type": "object",
+                                    "properties": {
+                                      "persistDataFrame": {
+                                        "type": "boolean"
+                                      },
+                                      "primaryKey": {
+                                        "type": "string"
+                                      },
+                                      "numRepartitions": {
+                                        "type": "string"
+                                      },
+                                      "enableDataReconciliation": {
+                                        "type": "boolean"
+                                      },
+                                      "enforceSchema": {
+                                        "type": "boolean"
+                                      },
+                                      "enforceSchemaMethod": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "additionalProperties": true,
+                                    "required": []
+                                  },
+                                  "alias": {
+                                    "type": "string"
+                                  },
+                                  "isDynamic": {
+                                    "type": "boolean"
+                                  }
+                                },
+                                "required": [
+                                  "connection",
+                                  "tableName/query",
+                                  "alias",
+                                  "isDynamic"
+                                ]
+                              },
+                              "else": {
+                                "if": {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "const": "readRedshiftTableByQuery"
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "type": "object",
+                                  "properties": {
+                                    "connection": {
+                                      "type": "string"
+                                    },
+                                    "query": {
+                                      "type": "string"
+                                    },
+                                    "endPoint": {
+                                      "type": "string"
+                                    },
+                                    "temporaryPathS3": {
+                                      "type": "string"
+                                    },
+                                    "optional": {
+                                      "type": "object",
+                                      "properties": {
+                                        "s3connections": {
+                                          "type": "string"
+                                        },
+                                        "persistDataFrame": {
+                                          "type": "boolean"
+                                        },
+                                        "enableDataReconciliation": {
+                                          "type": "boolean"
+                                        },
+                                        "enforceSchema": {
+                                          "type": "boolean"
+                                        },
+                                        "enforceSchemaMethod": {
+                                          "type": "string"
+                                        },
+                                        "isUser": {
+                                          "type": "boolean"
+                                        },
+                                        "awsIAMRole": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "additionalProperties": true,
+                                      "required": []
+                                    },
+                                    "alias": {
+                                      "type": "string"
+                                    },
+                                    "isDynamic": {
+                                      "type": "boolean"
+                                    }
+                                  },
+                                  "required": [
+                                    "connection",
+                                    "query",
+                                    "endPoint",
+                                    "temporaryPathS3",
+                                    "alias",
+                                    "isDynamic"
+                                  ]
+                                },
+                                "else": {
+                                  "if": {
+                                    "type": "object",
+                                    "properties": {
+                                      "type": {
+                                        "const": "readDataFromAPIGet"
+                                      }
+                                    }
+                                  },
+                                  "then": {
+                                    "type": "object",
+                                    "properties": {
+                                      "URL": {
+                                        "type": "string"
+                                      },
+                                      "optional": {
+                                        "type": "object",
+                                        "properties": {
+                                          "persistDataFrame": {
+                                            "type": "boolean"
+                                          },
+                                          "header": {
+                                            "type": "string"
+                                          },
+                                          "body": {
+                                            "type": "string"
+                                          },
+                                          "responseKeyPresent": {
+                                            "type": "boolean"
+                                          },
+                                          "responseKeySeq": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "enableDataReconciliation": {
+                                            "type": "boolean"
+                                          },
+                                          "enforceSchema": {
+                                            "type": "boolean"
+                                          },
+                                          "enforceSchemaMethod": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "additionalProperties": true,
+                                        "required": []
+                                      },
+                                      "alias": {
+                                        "type": "string"
+                                      },
+                                      "isDynamic": {
+                                        "type": "boolean"
+                                      }
+                                    },
+                                    "required": [
+                                      "URL",
+                                      "alias",
+                                      "isDynamic"
+                                    ]
+                                  },
+                                  "else": {
+                                    "if": {
+                                      "type": "object",
+                                      "properties": {
+                                        "type": {
+                                          "const": "readDataFromAPIPost"
+                                        }
+                                      }
+                                    },
+                                    "then": {
+                                      "type": "object",
+                                      "properties": {
+                                        "URL": {
+                                          "type": "string"
+                                        },
+                                        "optional": {
+                                          "type": "object",
+                                          "properties": {
+                                            "persistDataFrame": {
+                                              "type": "boolean"
+                                            },
+                                            "header": {
+                                              "type": "string"
+                                            },
+                                            "body": {
+                                              "type": "string"
+                                            },
+                                            "responseKeyPresent": {
+                                              "type": "boolean"
+                                            },
+                                            "responseKeySeq": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "connectionTimeout": {
+                                              "type": "integer"
+                                            },
+                                            "readTimeout": {
+                                              "type": "integer"
+                                            },
+                                            "enableDataReconciliation": {
+                                              "type": "boolean"
+                                            },
+                                            "enforceSchema": {
+                                              "type": "boolean"
+                                            },
+                                            "enforceSchemaMethod": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "additionalProperties": true,
+                                          "required": []
+                                        },
+                                        "alias": {
+                                          "type": "string"
+                                        },
+                                        "isDynamic": {
+                                          "type": "boolean"
+                                        }
+                                      },
+                                      "required": [
+                                        "URL",
+                                        "alias",
+                                        "isDynamic"
+                                      ]
+                                    },
+                                    "else": {
+                                      "if": {
+                                        "type": "object",
+                                        "properties": {
+                                          "type": {
+                                            "const": "readBigQueryTable"
+                                          }
+                                        }
+                                      },
+                                      "then": {
+                                        "type": "object",
+                                        "properties": {
+                                          "type": {
+                                            "type": "string"
+                                          },
+                                          "projectId": {
+                                            "type": "string"
+                                          },
+                                          "dataset": {
+                                            "type": "string"
+                                          },
+                                          "tableName/query": {
+                                            "type": "string"
+                                          },
+                                          "serviceAccountCredential": {
+                                            "type": "string"
+                                          },
+                                          "optional": {
+                                            "type": "object",
+                                            "properties": {
+                                              "persistDataFrame": {
+                                                "type": "boolean"
+                                              },
+                                              "enableDataReconciliation": {
+                                                "type": "boolean"
+                                              },
+                                              "enforceSchema": {
+                                                "type": "boolean"
+                                              },
+                                              "enforceSchemaMethod": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "additionalProperties": true,
+                                            "required": []
+                                          },
+                                          "alias": {
+                                            "type": "string"
+                                          },
+                                          "isDynamic": {
+                                            "type": "boolean"
+                                          }
+                                        },
+                                        "required": [
+                                          "type",
+                                          "projectId",
+                                          "dataset",
+                                          "tableName/query",
+                                          "serviceAccountCredential",
+                                          "alias",
+                                          "isDynamic"
+                                        ]
+                                      },
+                                      "else": {
+                                        "if": {
+                                          "type": "object",
+                                          "properties": {
+                                            "type": {
+                                              "const": "readSnowflakeTable"
+                                            }
+                                          }
+                                        },
+                                        "then": {
+                                          "type": "object",
+                                          "properties": {
+                                            "type": {
+                                              "type": "string"
+                                            },
+                                            "connection": {
+                                              "type": "string"
+                                            },
+                                            "tableName/query": {
+                                              "type": "string"
+                                            },
+                                            "optional": {
+                                              "type": "object",
+                                              "properties": {
+                                                "persistDataFrame": {
+                                                  "type": "boolean"
+                                                },
+                                                "warehouse": {
+                                                  "type": "string"
+                                                },
+                                                "role": {
+                                                  "type": "string"
+                                                },
+                                                "enableDataReconciliation": {
+                                                  "type": "boolean"
+                                                },
+                                                "enforceSchema": {
+                                                  "type": "boolean"
+                                                },
+                                                "enforceSchemaMethod": {
+                                                  "type": "string"
+                                                }
+                                              },
+                                              "additionalProperties": true,
+                                              "required": []
+                                            },
+                                            "alias": {
+                                              "type": "string"
+                                            },
+                                            "isDynamic": {
+                                              "type": "boolean"
+                                            }
+                                          },
+                                          "required": [
+                                            "type",
+                                            "connection",
+                                            "tableName/query",
+                                            "alias",
+                                            "isDynamic"
+                                          ]
+                                        },
+                                        "else": {
+                                          "if": {
+                                            "type": "object",
+                                            "properties": {
+                                              "type": {
+                                                "const": "readFixedWidthFile"
+                                              }
+                                            }
+                                          },
+                                          "then": {
+                                            "type": "object",
+                                            "properties": {
+                                              "type": {
+                                                "type": "string"
+                                              },
+                                              "path": {
+                                                "type": "string"
+                                              },
+                                              "dataFrameColumns": {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "columnName": {
+                                                      "type": "string"
+                                                    },
+                                                    "columnWidth": {
+                                                      "type": "integer"
+                                                    }
+                                                  },
+                                                  "additionalProperties": true,
+                                                  "required": [
+                                                    "columnName",
+                                                    "columnWidth"
+                                                  ]
+                                                }
+                                              },
+                                              "optional": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "lineSeperator": {
+                                                    "type": "string"
+                                                  },
+                                                  "trimColumns": {
+                                                    "type": "boolean"
+                                                  },
+                                                  "persistDataFrame": {
+                                                    "type": "boolean"
+                                                  },
+                                                  "enableDataReconciliation": {
+                                                    "type": "boolean"
+                                                  },
+                                                  "enforceSchema": {
+                                                    "type": "boolean"
+                                                  },
+                                                  "enforceSchemaMethod": {
+                                                    "type": "string"
+                                                  }
+                                                },
+                                                "additionalProperties": true,
+                                                "required": []
+                                              },
+                                              "alias": {
+                                                "type": "string"
+                                              },
+                                              "isDynamic": {
+                                                "type": "boolean"
+                                              }
+                                            },
+                                            "required": [
+                                              "type",
+                                              "path",
+                                              "dataFrameColumns",
+                                              "alias",
+                                              "isDynamic"
+                                            ]
+                                          },
+                                          "else": {
+                                            "if": {
+                                              "type": "object",
+                                              "properties": {
+                                                "type": {
+                                                  "const": "readHudiTable"
+                                                }
+                                              }
+                                            },
+                                            "then": {
+                                              "type": "object",
+                                              "properties": {
+                                                "type": {
+                                                  "type": "string"
+                                                },
+                                                "path": {
+                                                  "type": "string"
+                                                },
+                                                "optional": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "persistDataFrame": {
+                                                      "type": "boolean"
+                                                    },
+                                                    "columnsToDecrypt": {
+                                                      "type": "array",
+                                                      "items": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "endPoint": {
+                                                      "type": "string"
+                                                    },
+                                                    "readTableType": {
+                                                      "type": "string"
+                                                    },
+                                                    "accessKey": {
+                                                      "type": "string"
+                                                    },
+                                                    "secretKey": {
+                                                      "type": "string"
+                                                    },
+                                                    "mergeSchema": {
+                                                      "type": "boolean"
+                                                    },
+                                                    "enableDataReconciliation": {
+                                                      "type": "boolean"
+                                                    },
+                                                    "enforceSchema": {
+                                                      "type": "boolean"
+                                                    },
+                                                    "enforceSchemaMethod": {
+                                                      "type": "string"
+                                                    },
+                                                    "tillTimestamp": {
+                                                      "type": "string"
+                                                    },
+                                                    "fromTimestamp": {
+                                                      "type": "string"
+                                                    },
+                                                    "otherConfigs": {
+                                                      "type": "object",
+                                                      "properties": {},
+                                                      "patternProperties": {
+                                                        "^[0-9A-Za-z_]+": {
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "additionalProperties": true,
+                                                      "required": []
+                                                    },
+                                                    "connection": {
+                                                      "type": "string"
+                                                    }
+                                                  },
+                                                  "additionalProperties": true,
+                                                  "required": []
+                                                },
+                                                "alias": {
+                                                  "type": "string"
+                                                },
+                                                "isDynamic": {
+                                                  "type": "boolean"
+                                                }
+                                              },
+                                              "required": [
+                                                "type",
+                                                "path",
+                                                "alias",
+                                                "isDynamic"
+                                              ]
+                                            },
+                                            "else": {
+                                              "if": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "type": {
+                                                    "const": "readTeradataDbUsingJdbc"
+                                                  }
+                                                }
+                                              },
+                                              "then": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "connection": {
+                                                    "type": "string"
+                                                  },
+                                                  "tableName/query": {
+                                                    "type": "string"
+                                                  },
+                                                  "optional": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "persistDataFrame": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "mode": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "enforceSchema": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "enforceSchemaMethod": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "additionalProperties": true,
+                                                    "required": []
+                                                  },
+                                                  "alias": {
+                                                    "type": "string"
+                                                  },
+                                                  "isDynamic": {
+                                                    "type": "boolean"
+                                                  }
+                                                },
+                                                "required": [
+                                                  "connection",
+                                                  "tableName/query",
+                                                  "alias",
+                                                  "isDynamic"
+                                                ]
+                                              },
+                                              "else": {
+                                                "if": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "type": {
+                                                      "const": "readDataIceberg"
+                                                    }
+                                                  }
+                                                },
+                                                "then": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "tableName": {
+                                                      "type": "string"
+                                                    },
+                                                    "warehousePath": {
+                                                      "type": "string"
+                                                    },
+                                                    "catalogName": {
+                                                      "type": "string"
+                                                    },
+                                                    "optional": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "persistDataFrame": {
+                                                          "type": "boolean"
+                                                        },
+                                                        "catalogType": {
+                                                          "type": "string"
+                                                        },
+                                                        "columnsToDecrypt": {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "string"
+                                                          }
+                                                        },
+                                                        "enforceSchema": {
+                                                          "type": "boolean"
+                                                        },
+                                                        "enforceSchemaMethod": {
+                                                          "type": "string"
+                                                        },
+                                                        "connection": {
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "additionalProperties": true,
+                                                      "required": []
+                                                    },
+                                                    "alias": {
+                                                      "type": "string"
+                                                    },
+                                                    "isDynamic": {
+                                                      "type": "boolean"
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "tableName",
+                                                    "warehousePath",
+                                                    "catalogName",
+                                                    "alias",
+                                                    "isDynamic"
+                                                  ]
+                                                },
+                                                "else": {
+                                                  "if": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "type": {
+                                                        "const": "readDeltaTable"
+                                                      }
+                                                    }
+                                                  },
+                                                  "then": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "tableLocation": {
+                                                        "type": "string"
+                                                      },
+                                                      "optional": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "persistDataFrame": {
+                                                            "type": "boolean"
+                                                          },
+                                                          "columnsToDecrypt": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "string"
+                                                            }
+                                                          },
+                                                          "readDeltaOptions": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                              "startingTimestamp": {
+                                                                "type": "string"
+                                                              },
+                                                              "endingTimestamp": {
+                                                                "type": "string"
+                                                              },
+                                                              "startingVersion": {
+                                                                "type": "number"
+                                                              },
+                                                              "endingVersion": {
+                                                                "type": "number"
+                                                              }
+                                                            },
+                                                            "additionalProperties": true,
+                                                            "required": []
+                                                          },
+                                                          "enableDataReconciliation": {
+                                                            "type": "boolean"
+                                                          },
+                                                          "enforceSchema": {
+                                                            "type": "boolean"
+                                                          },
+                                                          "enforceSchemaMethod": {
+                                                            "type": "string"
+                                                          },
+                                                          "connection": {
+                                                            "type": "string"
+                                                          }
+                                                        },
+                                                        "additionalProperties": true,
+                                                        "required": []
+                                                      },
+                                                      "alias": {
+                                                        "type": "string"
+                                                      },
+                                                      "isDynamic": {
+                                                        "type": "boolean"
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "tableLocation",
+                                                      "alias",
+                                                      "isDynamic"
+                                                    ]
+                                                  },
+                                                  "else": {}
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

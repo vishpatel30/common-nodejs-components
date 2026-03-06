@@ -1,0 +1,2212 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "transformation",
+  "type": "array",
+  "title": "Transformation",
+  "description": "Transformation definition",
+  "items": {
+    "if": {
+      "not": {
+        "type": "object",
+        "properties": {
+          "isDynamic": {
+            "const": true
+          }
+        }
+      }
+    },
+    "then": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "alias": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 50,
+              "pattern": "^[A-Za-z0-9_]+$"
+            },
+            "type": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "query": {
+              "type": "string"
+            },
+            "sequenceNo": {
+              "type": "number"
+            },
+            "codeLocation": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "alias",
+            "type",
+            "query"
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "alias",
+            "type",
+            "pythonFilePath"
+          ],
+          "properties": {
+            "alias": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 50,
+              "pattern": "^[A-Za-z0-9_]+$"
+            },
+            "type": {
+              "type": "string"
+            },
+            "arguments": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "pythonFilePath": {
+              "type": "string"
+            },
+            "optional": {
+              "type": "object"
+            },
+            "sequence": {
+              "type": "number"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "alias",
+            "type",
+            "pipelineName"
+          ],
+          "properties": {
+            "alias": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 50,
+              "pattern": "^[A-Za-z0-9_]+$"
+            },
+            "type": {
+              "type": "string"
+            },
+            "pipelineName": {
+              "type": "string"
+            },
+            "optional": {
+              "type": "object"
+            },
+            "sequence": {
+              "type": "number"
+            }
+          }
+        }
+      ]
+    },
+    "else": {
+      "if": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "const": "selectColumns"
+          }
+        }
+      },
+      "then": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "inputDataFrame": {
+            "type": "string"
+          },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "optional": {
+            "type": "object",
+            "properties": {
+              "persistDataFrame": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": true,
+            "required": []
+          },
+          "alias": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "sequence": {
+            "type": "number"
+          },
+          "isDynamic": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "type",
+          "inputDataFrame",
+          "columns",
+          "alias",
+          "sequence",
+          "isDynamic"
+        ]
+      },
+      "else": {
+        "if": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "filterTransform"
+            }
+          }
+        },
+        "then": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "inputDataFrame": {
+              "type": "string"
+            },
+            "filterCondition": {
+              "type": "string"
+            },
+            "isConditionAsJsonString": {
+              "type": "boolean"
+            },
+            "optional": {
+              "type": "object",
+              "properties": {
+                "persistDataFrame": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": true,
+              "required": []
+            },
+            "alias": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "sequence": {
+              "type": "number"
+            },
+            "isDynamic": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "type",
+            "inputDataFrame",
+            "filterCondition",
+            "isConditionAsJsonString",
+            "alias",
+            "sequence",
+            "isDynamic"
+          ]
+        },
+        "else": {
+          "if": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "renameColumns"
+              }
+            }
+          },
+          "then": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "inputDataFrame": {
+                "type": "string"
+              },
+              "renameColumns": {
+                "type": "object",
+                "properties": {},
+                "patternProperties": {
+                  "^[0-9A-Za-z_]+": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": true,
+                "required": []
+              },
+              "optional": {
+                "type": "object",
+                "properties": {
+                  "persistDataFrame": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": true,
+                "required": []
+              },
+              "alias": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "sequence": {
+                "type": "number"
+              },
+              "isDynamic": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "type",
+              "inputDataFrame",
+              "renameColumns",
+              "alias",
+              "sequence",
+              "isDynamic"
+            ]
+          },
+          "else": {
+            "if": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "refreshData"
+                }
+              }
+            },
+            "then": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "inputDataFrame": {
+                  "type": "string"
+                },
+                "timestampColumn": {
+                  "type": "string"
+                },
+                "primaryKey": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "optional": {
+                  "type": "object",
+                  "properties": {
+                    "persistDataFrame": {
+                      "type": "boolean"
+                    }
+                  },
+                  "additionalProperties": true,
+                  "required": []
+                },
+                "alias": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "sequence": {
+                  "type": "number"
+                },
+                "isDynamic": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "type",
+                "inputDataFrame",
+                "timestampColumn",
+                "primaryKey",
+                "alias",
+                "sequence",
+                "isDynamic"
+              ]
+            },
+            "else": {
+              "if": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "const": "distinctDataFrame"
+                  }
+                }
+              },
+              "then": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "inputDataFrame": {
+                    "type": "string"
+                  },
+                  "optional": {
+                    "type": "object",
+                    "properties": {
+                      "persistDataFrame": {
+                        "type": "boolean"
+                      }
+                    },
+                    "additionalProperties": true,
+                    "required": []
+                  },
+                  "alias": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "type": "number"
+                  },
+                  "isDynamic": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "type",
+                  "inputDataFrame",
+                  "alias",
+                  "sequence",
+                  "isDynamic"
+                ]
+              },
+              "else": {
+                "if": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "const": "dropColumns"
+                    }
+                  }
+                },
+                "then": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "inputDataFrame": {
+                      "type": "string"
+                    },
+                    "columns": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "optional": {
+                      "type": "object",
+                      "properties": {
+                        "persistDataFrame": {
+                          "type": "boolean"
+                        }
+                      },
+                      "additionalProperties": true,
+                      "required": []
+                    },
+                    "alias": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "sequence": {
+                      "type": "number"
+                    },
+                    "isDynamic": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "inputDataFrame",
+                    "columns",
+                    "alias",
+                    "sequence",
+                    "isDynamic"
+                  ]
+                },
+                "else": {
+                  "if": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "getAggregate"
+                      }
+                    }
+                  },
+                  "then": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "inputDataFrame": {
+                        "type": "string"
+                      },
+                      "groupByColumns": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "columnName": {
+                              "type": "string"
+                            },
+                            "aliasName": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": true,
+                          "required": [
+                            "columnName",
+                            "aliasName"
+                          ]
+                        }
+                      },
+                      "aggregateColumns": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "columnName": {
+                              "type": "string"
+                            },
+                            "functionName": {
+                              "type": "string"
+                            },
+                            "aliasName": {
+                              "type": "string"
+                            }
+                          },
+                          "additionalProperties": true,
+                          "required": [
+                            "columnName",
+                            "functionName",
+                            "aliasName"
+                          ]
+                        }
+                      },
+                      "optional": {
+                        "type": "object",
+                        "properties": {
+                          "persistDataFrame": {
+                            "type": "boolean"
+                          }
+                        },
+                        "additionalProperties": true,
+                        "required": []
+                      },
+                      "alias": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "sequence": {
+                        "type": "number"
+                      },
+                      "isDynamic": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "inputDataFrame",
+                      "groupByColumns",
+                      "aggregateColumns",
+                      "alias",
+                      "sequence",
+                      "isDynamic"
+                    ]
+                  },
+                  "else": {
+                    "if": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "unionDataFrames"
+                        }
+                      }
+                    },
+                    "then": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "inputDataFrame1": {
+                          "type": "string"
+                        },
+                        "inputDataFrame2": {
+                          "type": "string"
+                        },
+                        "optional": {
+                          "type": "object",
+                          "properties": {
+                            "persistDataFrame": {
+                              "type": "boolean"
+                            },
+                            "mergeSchema": {
+                              "type": "boolean"
+                            }
+                          },
+                          "additionalProperties": true,
+                          "required": []
+                        },
+                        "alias": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "sequence": {
+                          "type": "number"
+                        },
+                        "isDynamic": {
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "inputDataFrame1",
+                        "inputDataFrame2",
+                        "alias",
+                        "sequence",
+                        "isDynamic"
+                      ]
+                    },
+                    "else": {
+                      "if": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "const": "trimDataFrame"
+                          }
+                        }
+                      },
+                      "then": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string"
+                          },
+                          "inputDataFrame": {
+                            "type": "string"
+                          },
+                          "optional": {
+                            "type": "object",
+                            "properties": {
+                              "persistDataFrame": {
+                                "type": "boolean"
+                              },
+                              "useAllColumns": {
+                                "type": "boolean"
+                              },
+                              "columns": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "additionalProperties": true,
+                            "required": []
+                          },
+                          "alias": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "sequence": {
+                            "type": "number"
+                          },
+                          "isDynamic": {
+                            "type": "boolean"
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "inputDataFrame",
+                          "alias",
+                          "sequence",
+                          "isDynamic"
+                        ]
+                      },
+                      "else": {
+                        "if": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "const": "createPivotTable"
+                            }
+                          }
+                        },
+                        "then": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string"
+                            },
+                            "inputDataFrame": {
+                              "type": "string"
+                            },
+                            "pivotKey": {
+                              "type": "string"
+                            },
+                            "groupByColumns": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "columnName": {
+                                    "type": "string"
+                                  },
+                                  "aliasName": {
+                                    "type": "string"
+                                  }
+                                },
+                                "additionalProperties": true,
+                                "required": [
+                                  "columnName",
+                                  "aliasName"
+                                ]
+                              }
+                            },
+                            "aggregateColumns": {
+                              "type": "object",
+                              "properties": {
+                                "columnName": {
+                                  "type": "string"
+                                },
+                                "functionName": {
+                                  "type": "string"
+                                },
+                                "aliasName": {
+                                  "type": "string"
+                                }
+                              },
+                              "additionalProperties": true,
+                              "required": [
+                                "columnName",
+                                "functionName",
+                                "aliasName"
+                              ]
+                            },
+                            "optional": {
+                              "type": "object",
+                              "properties": {
+                                "persistDataFrame": {
+                                  "type": "boolean"
+                                }
+                              },
+                              "additionalProperties": true,
+                              "required": []
+                            },
+                            "alias": {
+                              "type": "string"
+                            },
+                            "description": {
+                              "type": "string"
+                            },
+                            "sequence": {
+                              "type": "number"
+                            },
+                            "isDynamic": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "inputDataFrame",
+                            "pivotKey",
+                            "alias",
+                            "sequence",
+                            "isDynamic"
+                          ]
+                        },
+                        "else": {
+                          "if": {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "const": "unpivotDataFrame"
+                              }
+                            }
+                          },
+                          "then": {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string"
+                              },
+                              "inputDataFrame": {
+                                "type": "string"
+                              },
+                              "keyColumns": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "columnsToUnpivot": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "columnNameForNewKey": {
+                                "type": "string"
+                              },
+                              "columnNameForValue": {
+                                "type": "string"
+                              },
+                              "optional": {
+                                "type": "object",
+                                "properties": {
+                                  "persistDataFrame": {
+                                    "type": "boolean"
+                                  }
+                                },
+                                "additionalProperties": true,
+                                "required": []
+                              },
+                              "alias": {
+                                "type": "string"
+                              },
+                              "description": {
+                                "type": "string"
+                              },
+                              "sequence": {
+                                "type": "number"
+                              },
+                              "isDynamic": {
+                                "type": "boolean"
+                              }
+                            },
+                            "required": [
+                              "type",
+                              "inputDataFrame",
+                              "keyColumns",
+                              "columnsToUnpivot",
+                              "columnNameForNewKey",
+                              "columnNameForValue",
+                              "alias",
+                              "sequence",
+                              "isDynamic"
+                            ]
+                          },
+                          "else": {
+                            "if": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "const": "splitTextToColumns"
+                                }
+                              }
+                            },
+                            "then": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string"
+                                },
+                                "inputDataFrame": {
+                                  "type": "string"
+                                },
+                                "columnToSplit": {
+                                  "type": "string"
+                                },
+                                "splitOperator": {
+                                  "type": "string"
+                                },
+                                "optional": {
+                                  "type": "object",
+                                  "properties": {
+                                    "persistDataFrame": {
+                                      "type": "boolean"
+                                    }
+                                  },
+                                  "additionalProperties": true,
+                                  "required": []
+                                },
+                                "alias": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "sequence": {
+                                  "type": "number"
+                                },
+                                "isDynamic": {
+                                  "type": "boolean"
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "inputDataFrame",
+                                "columnToSplit",
+                                "splitOperator",
+                                "alias",
+                                "sequence",
+                                "isDynamic"
+                              ]
+                            },
+                            "else": {
+                              "if": {
+                                "type": "object",
+                                "properties": {
+                                  "type": {
+                                    "const": "calculatedColumnConcatenate"
+                                  }
+                                }
+                              },
+                              "then": {
+                                "type": "object",
+                                "properties": {
+                                  "type": {
+                                    "type": "string"
+                                  },
+                                  "inputDataFrame": {
+                                    "type": "string"
+                                  },
+                                  "columnList": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "concatColumnList": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "newColumnName": {
+                                          "type": "string"
+                                        },
+                                        "separator": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "additionalProperties": true,
+                                      "required": [
+                                        "concatColumnList",
+                                        "newColumnName",
+                                        "separator"
+                                      ]
+                                    }
+                                  },
+                                  "optional": {
+                                    "type": "object",
+                                    "properties": {
+                                      "persistDataFrame": {
+                                        "type": "boolean"
+                                      }
+                                    },
+                                    "additionalProperties": true,
+                                    "required": []
+                                  },
+                                  "alias": {
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "sequence": {
+                                    "type": "number"
+                                  },
+                                  "isDynamic": {
+                                    "type": "boolean"
+                                  }
+                                },
+                                "required": [
+                                  "type",
+                                  "inputDataFrame",
+                                  "columnList",
+                                  "alias",
+                                  "sequence",
+                                  "isDynamic"
+                                ]
+                              },
+                              "else": {
+                                "if": {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "const": "calculatedColumnSubString"
+                                    }
+                                  }
+                                },
+                                "then": {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string"
+                                    },
+                                    "inputDataFrame": {
+                                      "type": "string"
+                                    },
+                                    "columnList": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "inputColumnName": {
+                                            "type": "string"
+                                          },
+                                          "newColumnName": {
+                                            "type": "string"
+                                          },
+                                          "startIndex": {
+                                            "type": "integer"
+                                          },
+                                          "length": {
+                                            "type": "integer"
+                                          }
+                                        },
+                                        "additionalProperties": true,
+                                        "required": [
+                                          "inputColumnName",
+                                          "newColumnName",
+                                          "startIndex",
+                                          "length"
+                                        ]
+                                      }
+                                    },
+                                    "optional": {
+                                      "type": "object",
+                                      "properties": {
+                                        "persistDataFrame": {
+                                          "type": "boolean"
+                                        }
+                                      },
+                                      "additionalProperties": true,
+                                      "required": []
+                                    },
+                                    "alias": {
+                                      "type": "string"
+                                    },
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "sequence": {
+                                      "type": "number"
+                                    },
+                                    "isDynamic": {
+                                      "type": "boolean"
+                                    }
+                                  },
+                                  "required": [
+                                    "type",
+                                    "inputDataFrame",
+                                    "columnList",
+                                    "alias",
+                                    "sequence",
+                                    "isDynamic"
+                                  ]
+                                },
+                                "else": {
+                                  "if": {
+                                    "type": "object",
+                                    "properties": {
+                                      "type": {
+                                        "const": "operationThroughSqlQuery"
+                                      }
+                                    }
+                                  },
+                                  "then": {
+                                    "type": "object",
+                                    "properties": {
+                                      "type": {
+                                        "type": "string"
+                                      },
+                                      "inputDataFrameList": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "inputDataFrame": {
+                                              "type": "string"
+                                            },
+                                            "tempViewName": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "additionalProperties": true,
+                                          "required": [
+                                            "inputDataFrame",
+                                            "tempViewName"
+                                          ]
+                                        }
+                                      },
+                                      "query": {
+                                        "type": "string"
+                                      },
+                                      "optional": {
+                                        "type": "object",
+                                        "properties": {
+                                          "persistDataFrame": {
+                                            "type": "boolean"
+                                          }
+                                        },
+                                        "additionalProperties": true,
+                                        "required": []
+                                      },
+                                      "alias": {
+                                        "type": "string"
+                                      },
+                                      "description": {
+                                        "type": "string"
+                                      },
+                                      "sequence": {
+                                        "type": "number"
+                                      },
+                                      "isDynamic": {
+                                        "type": "boolean"
+                                      }
+                                    },
+                                    "required": [
+                                      "type",
+                                      "inputDataFrameList",
+                                      "query",
+                                      "alias",
+                                      "sequence",
+                                      "isDynamic"
+                                    ]
+                                  },
+                                  "else": {
+                                    "if": {
+                                      "type": "object",
+                                      "properties": {
+                                        "type": {
+                                          "const": "orderByTransform"
+                                        }
+                                      }
+                                    },
+                                    "then": {
+                                      "type": "object",
+                                      "properties": {
+                                        "type": {
+                                          "type": "string"
+                                        },
+                                        "inputDataFrame": {
+                                          "type": "string"
+                                        },
+                                        "columnList": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "columnName": {
+                                                "type": "string"
+                                              },
+                                              "orderBy": {
+                                                "type": "string"
+                                              }
+                                            },
+                                            "additionalProperties": true,
+                                            "required": [
+                                              "columnName",
+                                              "orderBy"
+                                            ]
+                                          }
+                                        },
+                                        "optional": {
+                                          "type": "object",
+                                          "properties": {
+                                            "persistDataFrame": {
+                                              "type": "boolean"
+                                            }
+                                          },
+                                          "additionalProperties": true,
+                                          "required": []
+                                        },
+                                        "alias": {
+                                          "type": "string"
+                                        },
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "sequence": {
+                                          "type": "number"
+                                        },
+                                        "isDynamic": {
+                                          "type": "boolean"
+                                        }
+                                      },
+                                      "required": [
+                                        "type",
+                                        "inputDataFrame",
+                                        "columnList",
+                                        "alias",
+                                        "sequence",
+                                        "isDynamic"
+                                      ]
+                                    },
+                                    "else": {
+                                      "if": {
+                                        "type": "object",
+                                        "properties": {
+                                          "type": {
+                                            "const": "limitData"
+                                          }
+                                        }
+                                      },
+                                      "then": {
+                                        "type": "object",
+                                        "properties": {
+                                          "type": {
+                                            "type": "string"
+                                          },
+                                          "inputDataFrame": {
+                                            "type": "string"
+                                          },
+                                          "limitValue": {
+                                            "type": "integer"
+                                          },
+                                          "optional": {
+                                            "type": "object",
+                                            "properties": {
+                                              "persistDataFrame": {
+                                                "type": "boolean"
+                                              }
+                                            },
+                                            "additionalProperties": true,
+                                            "required": []
+                                          },
+                                          "alias": {
+                                            "type": "string"
+                                          },
+                                          "description": {
+                                            "type": "string"
+                                          },
+                                          "sequence": {
+                                            "type": "number"
+                                          },
+                                          "isDynamic": {
+                                            "type": "boolean"
+                                          }
+                                        },
+                                        "required": [
+                                          "type",
+                                          "inputDataFrame",
+                                          "limitValue",
+                                          "alias",
+                                          "sequence",
+                                          "isDynamic"
+                                        ]
+                                      },
+                                      "else": {
+                                        "if": {
+                                          "type": "object",
+                                          "properties": {
+                                            "type": {
+                                              "const": "stringToNumericListOfColumns"
+                                            }
+                                          }
+                                        },
+                                        "then": {
+                                          "type": "object",
+                                          "properties": {
+                                            "type": {
+                                              "type": "string"
+                                            },
+                                            "inputDataFrame": {
+                                              "type": "string"
+                                            },
+                                            "listOfColumns": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "inputColumnName": {
+                                                    "type": "string"
+                                                  },
+                                                  "outputColumnName": {
+                                                    "type": "string"
+                                                  },
+                                                  "dataType": {
+                                                    "type": "string"
+                                                  },
+                                                  "optionalConversion": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "numberConversionOptions": {
+                                                        "type": "string"
+                                                      },
+                                                      "replaceRegex": {
+                                                        "type": "string"
+                                                      },
+                                                      "replaceIfNull": {
+                                                        "type": "integer"
+                                                      },
+                                                      "replaceNullRequired": {
+                                                        "type": "boolean"
+                                                      }
+                                                    },
+                                                    "additionalProperties": true,
+                                                    "required": []
+                                                  }
+                                                },
+                                                "additionalProperties": true,
+                                                "required": [
+                                                  "inputColumnName",
+                                                  "outputColumnName",
+                                                  "dataType"
+                                                ]
+                                              }
+                                            },
+                                            "optional": {
+                                              "type": "object",
+                                              "properties": {
+                                                "persistDataFrame": {
+                                                  "type": "boolean"
+                                                }
+                                              },
+                                              "additionalProperties": true,
+                                              "required": []
+                                            },
+                                            "alias": {
+                                              "type": "string"
+                                            },
+                                            "description": {
+                                              "type": "string"
+                                            },
+                                            "sequence": {
+                                              "type": "number"
+                                            },
+                                            "isDynamic": {
+                                              "type": "boolean"
+                                            }
+                                          },
+                                          "required": [
+                                            "type",
+                                            "inputDataFrame",
+                                            "listOfColumns",
+                                            "alias",
+                                            "sequence",
+                                            "isDynamic"
+                                          ]
+                                        },
+                                        "else": {
+                                          "if": {
+                                            "type": "object",
+                                            "properties": {
+                                              "type": {
+                                                "const": "stringToDatetimeListOfColumns"
+                                              }
+                                            }
+                                          },
+                                          "then": {
+                                            "type": "object",
+                                            "properties": {
+                                              "type": {
+                                                "type": "string"
+                                              },
+                                              "inputDataFrame": {
+                                                "type": "string"
+                                              },
+                                              "listOfColumns": {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "inputColumnName": {
+                                                      "type": "string"
+                                                    },
+                                                    "outputColumnName": {
+                                                      "type": "string"
+                                                    },
+                                                    "dateType": {
+                                                      "type": "string"
+                                                    },
+                                                    "optionalConversion": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "dateConversion": {
+                                                          "type": "string"
+                                                        },
+                                                        "inputDateFormat": {
+                                                          "type": "string"
+                                                        },
+                                                        "replaceIfNull": {
+                                                          "type": "string"
+                                                        },
+                                                        "replaceNullRequired": {
+                                                          "type": "boolean"
+                                                        }
+                                                      },
+                                                      "additionalProperties": true,
+                                                      "required": []
+                                                    }
+                                                  },
+                                                  "additionalProperties": true,
+                                                  "required": [
+                                                    "inputColumnName",
+                                                    "outputColumnName",
+                                                    "dateType"
+                                                  ]
+                                                }
+                                              },
+                                              "optional": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "persistDataFrame": {
+                                                    "type": "boolean"
+                                                  }
+                                                },
+                                                "additionalProperties": true,
+                                                "required": []
+                                              },
+                                              "alias": {
+                                                "type": "string"
+                                              },
+                                              "description": {
+                                                "type": "string"
+                                              },
+                                              "sequence": {
+                                                "type": "number"
+                                              },
+                                              "isDynamic": {
+                                                "type": "boolean"
+                                              }
+                                            },
+                                            "required": [
+                                              "type",
+                                              "inputDataFrame",
+                                              "listOfColumns",
+                                              "alias",
+                                              "sequence",
+                                              "isDynamic"
+                                            ]
+                                          },
+                                          "else": {
+                                            "if": {
+                                              "type": "object",
+                                              "properties": {
+                                                "type": {
+                                                  "const": "renameFile"
+                                                }
+                                              }
+                                            },
+                                            "then": {
+                                              "type": "object",
+                                              "properties": {
+                                                "type": {
+                                                  "type": "string"
+                                                },
+                                                "inputFilePath": {
+                                                  "type": "string"
+                                                },
+                                                "inputFileToBeRenamed": {
+                                                  "type": "string"
+                                                },
+                                                "newFilePath": {
+                                                  "type": "string"
+                                                },
+                                                "newFileName": {
+                                                  "type": "string"
+                                                },
+                                                "optional": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "persistDataFrame": {
+                                                      "type": "boolean"
+                                                    }
+                                                  },
+                                                  "additionalProperties": true,
+                                                  "required": []
+                                                },
+                                                "alias": {
+                                                  "type": "string"
+                                                },
+                                                "description": {
+                                                  "type": "string"
+                                                },
+                                                "sequence": {
+                                                  "type": "number"
+                                                },
+                                                "isDynamic": {
+                                                  "type": "boolean"
+                                                }
+                                              },
+                                              "required": [
+                                                "type",
+                                                "inputFilePath",
+                                                "inputFileToBeRenamed",
+                                                "newFilePath",
+                                                "newFileName",
+                                                "alias",
+                                                "sequence",
+                                                "isDynamic"
+                                              ]
+                                            },
+                                            "else": {
+                                              "if": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "type": {
+                                                    "const": "joinDataframe"
+                                                  }
+                                                }
+                                              },
+                                              "then": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "sequence": {
+                                                    "type": "number"
+                                                  },
+                                                  "type": {
+                                                    "type": "string"
+                                                  },
+                                                  "leftDataFrame": {
+                                                    "type": "string"
+                                                  },
+                                                  "rightDataFrame": {
+                                                    "type": "string"
+                                                  },
+                                                  "joinKeys": {
+                                                    "type": "array",
+                                                    "items": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "leftKey": {
+                                                          "type": "string"
+                                                        },
+                                                        "rightKey": {
+                                                          "type": "string"
+                                                        },
+                                                        "joinOperator": {
+                                                          "type": "string"
+                                                        }
+                                                      },
+                                                      "additionalProperties": true,
+                                                      "required": [
+                                                        "leftKey",
+                                                        "rightKey"
+                                                      ]
+                                                    }
+                                                  },
+                                                  "joinType": {
+                                                    "type": "string"
+                                                  },
+                                                  "suffix": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "leftSuffix": {
+                                                        "type": "string"
+                                                      },
+                                                      "rightSuffix": {
+                                                        "type": "string"
+                                                      }
+                                                    },
+                                                    "additionalProperties": true,
+                                                    "required": [
+                                                      "leftSuffix",
+                                                      "rightSuffix"
+                                                    ]
+                                                  },
+                                                  "mismatchDataFrameName": {
+                                                    "type": "string"
+                                                  },
+                                                  "optional": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "persistDataFrame": {
+                                                        "type": "boolean"
+                                                      },
+                                                      "masterTransactionMismatch": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "enable": {
+                                                            "type": "boolean"
+                                                          },
+                                                          "getMissMatchOutput": {
+                                                            "type": "boolean"
+                                                          },
+                                                          "saveMismatch": {
+                                                            "type": "boolean"
+                                                          },
+                                                          "savePath": {
+                                                            "type": "string"
+                                                          },
+                                                          "fileLocationType": {
+                                                            "type": "string"
+                                                          },
+                                                          "fileNameForMismatchFile": {
+                                                            "type": "string"
+                                                          },
+                                                          "sendEmailUsingDeliveryScheduler": {
+                                                            "type": "boolean"
+                                                          },
+                                                          "kafkaCredentials": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                              "host": {
+                                                                "type": "string"
+                                                              },
+                                                              "port": {
+                                                                "type": "string"
+                                                              },
+                                                              "topicName": {
+                                                                "type": "string"
+                                                              }
+                                                            },
+                                                            "additionalProperties": true,
+                                                            "required": []
+                                                          },
+                                                          "SFTPCredentials": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                              "host": {
+                                                                "type": "string"
+                                                              },
+                                                              "user": {
+                                                                "type": "string"
+                                                              },
+                                                              "localFilePath": {
+                                                                "type": "string"
+                                                              },
+                                                              "passOptions": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                  "pem": {
+                                                                    "type": "string"
+                                                                  },
+                                                                  "password": {
+                                                                    "type": "string"
+                                                                  },
+                                                                  "pemPassphrase": {
+                                                                    "type": "string"
+                                                                  }
+                                                                },
+                                                                "additionalProperties": true,
+                                                                "required": []
+                                                              }
+                                                            },
+                                                            "additionalProperties": true,
+                                                            "required": []
+                                                          },
+                                                          "AWSCredentials": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                              "accessKey": {
+                                                                "type": "string"
+                                                              },
+                                                              "secretKey": {
+                                                                "type": "string"
+                                                              },
+                                                              "endPoint": {
+                                                                "type": "string"
+                                                              }
+                                                            },
+                                                            "additionalProperties": true,
+                                                            "required": [
+                                                              "accessKey",
+                                                              "secretKey",
+                                                              "endPoint"
+                                                            ]
+                                                          }
+                                                        },
+                                                        "additionalProperties": true,
+                                                        "required": [
+                                                          "SFTPCredentials",
+                                                          "AWSCredentials"
+                                                        ]
+                                                      }
+                                                    },
+                                                    "additionalProperties": true,
+                                                    "required": []
+                                                  },
+                                                  "alias": {
+                                                    "type": "string"
+                                                  },
+                                                  "description": {
+                                                    "type": "string"
+                                                  },
+                                                  "isDynamic": {
+                                                    "type": "boolean"
+                                                  }
+                                                },
+                                                "required": [
+                                                  "sequence",
+                                                  "type",
+                                                  "leftDataFrame",
+                                                  "rightDataFrame",
+                                                  "joinKeys",
+                                                  "joinType",
+                                                  "suffix",
+                                                  "mismatchDataFrameName",
+                                                  "alias",
+                                                  "isDynamic"
+                                                ]
+                                              },
+                                              "else": {
+                                                "if": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "type": {
+                                                      "const": "calculatedColumnCaseWhen"
+                                                    }
+                                                  }
+                                                },
+                                                "then": {
+                                                  "type": "object",
+                                                  "properties": {
+                                                    "type": {
+                                                      "type": "string"
+                                                    },
+                                                    "inputDataFrame": {
+                                                      "type": "string"
+                                                    },
+                                                    "calculatedColumns": {
+                                                      "type": "object",
+                                                      "properties": {},
+                                                      "patternProperties": {
+                                                        "^[a-zA-Z]": {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                              "condition": {
+                                                                "type": "string"
+                                                              },
+                                                              "formula": {
+                                                                "type": "string"
+                                                              },
+                                                              "isValue": {
+                                                                "type": "boolean"
+                                                              }
+                                                            },
+                                                            "additionalProperties": true,
+                                                            "required": [
+                                                              "condition",
+                                                              "formula",
+                                                              "isValue"
+                                                            ]
+                                                          }
+                                                        }
+                                                      },
+                                                      "additionalProperties": true,
+                                                      "required": []
+                                                    },
+                                                    "optional": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "persistDataFrame": {
+                                                          "type": "boolean"
+                                                        }
+                                                      },
+                                                      "additionalProperties": true,
+                                                      "required": []
+                                                    },
+                                                    "alias": {
+                                                      "type": "string"
+                                                    },
+                                                    "description": {
+                                                      "type": "string"
+                                                    },
+                                                    "sequence": {
+                                                      "type": "number"
+                                                    },
+                                                    "isDynamic": {
+                                                      "type": "boolean"
+                                                    }
+                                                  },
+                                                  "required": [
+                                                    "type",
+                                                    "inputDataFrame",
+                                                    "calculatedColumns",
+                                                    "alias",
+                                                    "sequence",
+                                                    "isDynamic"
+                                                  ]
+                                                },
+                                                "else": {
+                                                  "if": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "type": {
+                                                        "const": "keyContributor"
+                                                      }
+                                                    }
+                                                  },
+                                                  "then": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                      "keyContributorURL": {
+                                                        "type": "string"
+                                                      },
+                                                      "metricName": {
+                                                        "type": "string"
+                                                      },
+                                                      "comparableDataFrame": {
+                                                        "type": "string"
+                                                      },
+                                                      "baseDataFrame": {
+                                                        "type": "string"
+                                                      },
+                                                      "dimensionColumnName": {
+                                                        "type": "string"
+                                                      },
+                                                      "valueColumnName": {
+                                                        "type": "string"
+                                                      },
+                                                      "optional": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "persistDataFrame": {
+                                                            "type": "boolean"
+                                                          },
+                                                          "threshold": {
+                                                            "type": "string"
+                                                          },
+                                                          "contributionValues": {
+                                                            "type": "string"
+                                                          }
+                                                        },
+                                                        "additionalProperties": true,
+                                                        "required": []
+                                                      },
+                                                      "alias": {
+                                                        "type": "string"
+                                                      },
+                                                      "description": {
+                                                        "type": "string"
+                                                      },
+                                                      "sequence": {
+                                                        "type": "number"
+                                                      },
+                                                      "isDynamic": {
+                                                        "type": "boolean"
+                                                      }
+                                                    },
+                                                    "required": [
+                                                      "keyContributorURL",
+                                                      "metricName",
+                                                      "comparableDataFrame",
+                                                      "baseDataFrame",
+                                                      "dimensionColumnName",
+                                                      "valueColumnName",
+                                                      "alias",
+                                                      "sequence",
+                                                      "isDynamic"
+                                                    ]
+                                                  },
+                                                  "else": {
+                                                    "if": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "type": {
+                                                          "const": "refreshDataSCD1"
+                                                        }
+                                                      }
+                                                    },
+                                                    "then": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "type": {
+                                                          "type": "string"
+                                                        },
+                                                        "existingDataFrame": {
+                                                          "type": "string"
+                                                        },
+                                                        "incrementalDataFrame": {
+                                                          "type": "string"
+                                                        },
+                                                        "primaryKey": {
+                                                          "type": "array",
+                                                          "items": {
+                                                            "type": "string"
+                                                          }
+                                                        },
+                                                        "optional": {
+                                                          "type": "object",
+                                                          "properties": {
+                                                            "persistDataFrame": {
+                                                              "type": "boolean"
+                                                            },
+                                                            "timestampColumn": {
+                                                              "type": "string"
+                                                            },
+                                                            "changeTrackingColumns": {
+                                                              "type": "array",
+                                                              "items": {
+                                                                "type": "string"
+                                                              }
+                                                            }
+                                                          },
+                                                          "additionalProperties": true,
+                                                          "required": []
+                                                        },
+                                                        "alias": {
+                                                          "type": "string"
+                                                        },
+                                                        "description": {
+                                                          "type": "string"
+                                                        },
+                                                        "sequence": {
+                                                          "type": "number"
+                                                        },
+                                                        "isDynamic": {
+                                                          "type": "boolean"
+                                                        }
+                                                      },
+                                                      "required": [
+                                                        "type",
+                                                        "existingDataFrame",
+                                                        "incrementalDataFrame",
+                                                        "primaryKey",
+                                                        "alias",
+                                                        "sequence",
+                                                        "isDynamic"
+                                                      ]
+                                                    },
+                                                    "else": {
+                                                      "if": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "type": {
+                                                            "const": "refreshDataSCD2"
+                                                          }
+                                                        }
+                                                      },
+                                                      "then": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                          "primaryKey": {
+                                                            "type": "array",
+                                                            "items": {
+                                                              "type": "string"
+                                                            }
+                                                          },
+                                                          "incrementalDataFrame": {
+                                                            "type": "string"
+                                                          },
+                                                          "existingDataFrame": {
+                                                            "type": "string"
+                                                          },
+                                                          "optional": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                              "persistDataFrame": {
+                                                                "type": "boolean"
+                                                              },
+                                                              "isBulkData": {
+                                                                "type": "boolean"
+                                                              },
+                                                              "timestampColumn": {
+                                                                "type": "string"
+                                                              },
+                                                              "changeTrackingColumns": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                  "type": "string"
+                                                                }
+                                                              },
+                                                              "scd2ColumnNames": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                  "type": "string"
+                                                                }
+                                                              }
+                                                            },
+                                                            "additionalProperties": true,
+                                                            "required": []
+                                                          },
+                                                          "alias": {
+                                                            "type": "string"
+                                                          },
+                                                          "description": {
+                                                            "type": "string"
+                                                          },
+                                                          "sequence": {
+                                                            "type": "number"
+                                                          },
+                                                          "isDynamic": {
+                                                            "type": "boolean"
+                                                          }
+                                                        },
+                                                        "required": [
+                                                          "primaryKey",
+                                                          "incrementalDataFrame",
+                                                          "existingDataFrame",
+                                                          "alias",
+                                                          "sequence",
+                                                          "isDynamic"
+                                                        ]
+                                                      },
+                                                      "else": {
+                                                        "if": {
+                                                          "type": "object",
+                                                          "properties": {
+                                                            "type": {
+                                                              "const": "customPySparkEMRServerless"
+                                                            }
+                                                          }
+                                                        },
+                                                        "then": {
+                                                          "type": "object",
+                                                          "properties": {
+                                                            "arguments": {
+                                                              "type": "array",
+                                                              "items": {
+                                                                "type": "string"
+                                                              }
+                                                            },
+                                                            "pythonFilePath": {
+                                                              "type": "string"
+                                                            },
+                                                            "inputDataFrameList": {
+                                                              "type": "array",
+                                                              "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                  "inputDataFrame": {
+                                                                    "type": "string"
+                                                                  },
+                                                                  "tempViewName": {
+                                                                    "type": "string"
+                                                                  }
+                                                                },
+                                                                "additionalProperties": true,
+                                                                "required": []
+                                                              }
+                                                            },
+                                                            "optional": {
+                                                              "type": "object",
+                                                              "properties": {
+                                                                "pythonExtraZipFilePath": {
+                                                                  "type": "string"
+                                                                },
+                                                                "pythonEnvTarGZPath": {
+                                                                  "type": "string"
+                                                                },
+                                                                "sparkExtraConf": {
+                                                                  "type": "object",
+                                                                  "properties": {},
+                                                                  "patternProperties": {
+                                                                    "^[0-9A-Za-z_]+": {
+                                                                      "type": "string"
+                                                                    }
+                                                                  },
+                                                                  "additionalProperties": true,
+                                                                  "required": []
+                                                                }
+                                                              },
+                                                              "additionalProperties": true,
+                                                              "required": []
+                                                            },
+                                                            "alias": {
+                                                              "type": "string"
+                                                            },
+                                                            "description": {
+                                                              "type": "string"
+                                                            },
+                                                            "sequence": {
+                                                              "type": "number"
+                                                            },
+                                                            "isDynamic": {
+                                                              "type": "boolean"
+                                                            }
+                                                          },
+                                                          "required": [
+                                                            "alias",
+                                                            "sequence",
+                                                            "isDynamic"
+                                                          ]
+                                                        },
+                                                        "else": {
+                                                          "if": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                              "type": {
+                                                                "const": "customPySparkDatabricks"
+                                                              }
+                                                            }
+                                                          },
+                                                          "then": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                              "arguments": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                  "type": "string"
+                                                                }
+                                                              },
+                                                              "pythonFilePath": {
+                                                                "type": "string"
+                                                              },
+                                                              "inputDataFrameList": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                  "type": "object",
+                                                                  "properties": {
+                                                                    "inputDataFrame": {
+                                                                      "type": "string"
+                                                                    },
+                                                                    "tempViewName": {
+                                                                      "type": "string"
+                                                                    }
+                                                                  },
+                                                                  "additionalProperties": true,
+                                                                  "required": []
+                                                                }
+                                                              },
+                                                              "optional": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                  "dependencies": {
+                                                                    "type": "string"
+                                                                  },
+                                                                  "sparkExtraConf": {
+                                                                    "type": "object",
+                                                                    "properties": {},
+                                                                    "patternProperties": {
+                                                                      "^[0-9A-Za-z_]+": {
+                                                                        "type": "string"
+                                                                      }
+                                                                    },
+                                                                    "additionalProperties": true,
+                                                                    "required": []
+                                                                  }
+                                                                },
+                                                                "additionalProperties": true,
+                                                                "required": []
+                                                              },
+                                                              "alias": {
+                                                                "type": "string"
+                                                              },
+                                                              "description": {
+                                                                "type": "string"
+                                                              },
+                                                              "sequence": {
+                                                                "type": "number"
+                                                              },
+                                                              "isDynamic": {
+                                                                "type": "boolean"
+                                                              }
+                                                            },
+                                                            "required": [
+                                                              "alias",
+                                                              "sequence",
+                                                              "isDynamic"
+                                                            ]
+                                                          },
+                                                          "else": {
+                                                            "if": {
+                                                              "type": "object",
+                                                              "properties": {
+                                                                "type": {
+                                                                  "const": "customAWSSagemaker"
+                                                                }
+                                                              }
+                                                            },
+                                                            "then": {
+                                                              "type": "object",
+                                                              "properties": {
+                                                                "type": {
+                                                                  "type": "string"
+                                                                },
+                                                                "pipelineName": {
+                                                                  "type": "string"
+                                                                },
+                                                                "optional": {
+                                                                  "type": "object",
+                                                                  "properties": {
+                                                                    "persistDataFrame": {
+                                                                      "type": "boolean"
+                                                                    },
+                                                                    "input_param": {
+                                                                      "type": "object",
+                                                                      "properties": {},
+                                                                      "patternProperties": {
+                                                                        "^[0-9A-Za-z_]+": {
+                                                                          "type": "string"
+                                                                        }
+                                                                      },
+                                                                      "additionalProperties": true,
+                                                                      "required": []
+                                                                    }
+                                                                  },
+                                                                  "additionalProperties": true,
+                                                                  "required": []
+                                                                },
+                                                                "alias": {
+                                                                  "type": "string"
+                                                                },
+                                                                "description": {
+                                                                  "type": "string"
+                                                                },
+                                                                "sequence": {
+                                                                  "type": "number"
+                                                                },
+                                                                "isDynamic": {
+                                                                  "type": "boolean"
+                                                                }
+                                                              },
+                                                              "required": [
+                                                                "type",
+                                                                "pipelineName",
+                                                                "alias",
+                                                                "sequence",
+                                                                "isDynamic"
+                                                              ]
+                                                            },
+                                                            "else": {}
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

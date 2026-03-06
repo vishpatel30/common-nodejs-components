@@ -1,0 +1,436 @@
+openapi: '3.0.0'
+
+info:
+  title: 'Nodejs Postgres Base Service'
+  description: 'Nodejs Postgres Base Service'
+  version: '0.0.1'
+
+paths:
+  /workspaces:
+    post:
+      tags:
+        - 'Workspaces'
+      summary: 'Create a new Workspace'
+      operationId: 'createWorkspace'
+      requestBody:
+        description: 'Workspace description'
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/WorkspaceRequest'
+      responses:
+        '201':
+          description: 'Workspace has been successfully created'
+          headers:
+            Location:
+              schema:
+                type: string
+                format: URI
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                required: ['id']
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '415':
+          $ref: '#/components/responses/UnSupportedMediaType'
+
+    get:
+      tags:
+        - 'Workspaces'
+      summary: 'List all created workspaces'
+      operationId: 'listWorkspaces'
+      parameters:
+        - in: query
+          name: '_limit'
+          description: 'The numbers of domains to return'
+          schema:
+            type: integer
+            default: 20
+            minimum: 0
+            maximum: 30
+        - in: query
+          name: '_offset'
+          description: 'The number of domains to skip before starting to collect the result set'
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+        - in: query
+          name: '_sort'
+          description: 'Sorting field'
+          schema:
+            type: string
+            default: name
+        - in: query
+          name: '_order'
+          description: 'Sort order asc/desc'
+          schema:
+            type: string
+            enum: [ASC, DESC]
+            default: ASC
+        - in: query
+          name: '_deleted'
+          description: 'whether to include soft deleted items or not'
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: 'List of workspaces'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkspaceResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
+  /workspaces/{id}:
+    get:
+      tags:
+        - 'Workspaces'
+      summary: 'Get workspace details'
+      operationId: 'getWorkspace'
+      parameters:
+        - in: path
+          name: 'id'
+          description: 'Workspace Id'
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '200':
+          description: 'Workspace details retrieved'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    patch:
+      tags:
+        - 'Workspaces'
+      summary: 'Update workspace'
+      operationId: 'updateWorkspace'
+      parameters:
+        - in: path
+          name: 'id'
+          description: 'Workspace Id'
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 'Workspace description'
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/WorkspaceRequest'
+      responses:
+        '200':
+          description: 'Updated workspace'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '412':
+          $ref: '#/components/responses/Conflict'
+        '415':
+          $ref: '#/components/responses/UnSupportedMediaType'
+
+    delete:
+      tags:
+        - 'Workspaces'
+      summary: 'Delete Workspace'
+      operationId: 'deleteWorkspace'
+      parameters:
+        - in: path
+          name: 'id'
+          description: 'Workspace Id'
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '200':
+          description: 'Workspace successfully deleted'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /users:
+    post:
+      tags:
+        - 'Uses'
+      summary: 'Create a new user'
+      operationId: 'createUser'
+      requestBody:
+        description: 'User details'
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: 'User created successfully'
+          headers:
+            Location:
+              schema:
+                type: string
+                format: URI
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                required: ['id']
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '415':
+          $ref: '#/components/responses/UnSupportedMediaType'
+
+  /file-test:
+    post:
+      requestBody:
+        description: 'Image payload'
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: 'Asset has been successfully uploaded'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+components:
+  responses:
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          example:
+            code: 'error.resource.not-found'
+            message: 'Requested resource with ID: 3fa85f64-5717-4562-b3fc-2c963f66afa6 was not found'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          example:
+            code: 'error.auth.unauthorized'
+            message: 'Operation rejected because of missing or invalid auth credentials'
+    RequestEntityTooLarge:
+      description: Request entity too large
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          example:
+            code: 'error.request.tooLarge'
+            message: 'The request is larger than the server is willing or able to process. Previously called "Request Entity Too Large'
+    ExpectationFailed:
+      description: Expectation failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          example:
+            code: 'error.request.failed'
+            message: 'The server cannot meet the requirements of the Expect request-header field.'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          example:
+            code: 'error.internal.server'
+            message: 'The server has encountered a situation it does not know how to handle.'
+    ServiceUnavailable:
+      description: Service not available
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          example:
+            code: 'error.service.unavailable'
+            message: 'The server cannot handle the request (because it is overloaded or down for maintenance). Generally, this is a temporary state.'
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          example:
+            code: 'error.request.invalid'
+            message: 'Request contains invalid values or missing required properties'
+    Conflict:
+      description: Old Version received from Client
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          example:
+            code: error.data-source.client.old-version
+            message: ' client sends an update for old version of the document using If-Match header'
+    UnSupportedMediaType:
+      description: UnSupported input
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          example:
+            code: error.data-source.un-supported
+            message: 'client sending a POST or PUT/PATCH with content-type cannot be fulfilled by the server. e.g someone send content type "text/xml" but we only accept application/json'
+    NotAcceptable:
+      description: Content Cannot Be Served
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+          example:
+            code: error.data-source.content.not-served
+            message: 'client is requesting content which cannot be served by the server'
+
+  schemas:
+    WorkspaceResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          pattern: "^([a-zA-Z])([a-zA-Z]|\\d|\\ )*$"
+          minLength: 1
+          maxLength: 255
+        logo:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    WorkspaceRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          pattern: "^([a-zA-Z])([a-zA-Z]|\\d|\\ )*$"
+        logo:
+          type: string
+      required: ['name']
+      additionalProperties: false
+
+    User:
+      type: object
+      properties:
+        firstName:
+          type: string
+          pattern: "^([a-zA-Z])([a-zA-Z]|\\d|\\ )*$"
+        lastName:
+          type: string
+      required: ['firstName', 'lastName']
+      additionalProperties: false
+
+    ApiError:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A short, summary of the problem type. Written in english and readable for engineers.
+          example: Service Unavailable
+        code:
+          type: string
+          description: Error code. Can be used for translation.
+          example: error.resource.not-found
+
+        target:
+          type: string
+          description: The target of the error.
+
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiError'
+
+          description: List of failed swagger validations.
+          example: |
+            [
+              {
+                "target": ".body.name",
+                "message": "should match pattern \"^([a-zA-Z])([a-zA-Z]|\\d|\\ )*$\"",
+                "code": "pattern.openapi.validation"
+              },
+              {
+                "target": ".body.logo",
+                "message": "should match format \"uuid\"",
+                "code": "format.openapi.validation"
+              }
+            ]
+
+externalDocs:
+  description: 'Find out more about Swagger'
+  url: 'http://swagger.io'

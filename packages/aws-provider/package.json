@@ -1,0 +1,27 @@
+{
+  "name": "@dataverse/aws-provider",
+  "version": "0.0.1",
+  "description": "NodeJS Dataverse AWS Provider",
+  "homepage": "https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components#readme",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components.git"
+  },
+  "scripts": {
+    "test": "jest -c ../../jest.config.js",
+    "build": "tsc",
+    "clean": "rm -r ./dist"
+  },
+  "bugs": {
+    "url": "https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components/issues"
+  },
+  "dependencies": {
+    "@dataverse/logger": "^0.0.2",
+    "aws-sdk": "^2.0.0"
+  }
+}

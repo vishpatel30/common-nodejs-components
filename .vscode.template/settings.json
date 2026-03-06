@@ -1,0 +1,26 @@
+{
+  "prettier.singleQuote": true,
+  "editor.tabSize": 2,
+  "explorer.confirmDragAndDrop": false,
+  "prettier.printWidth": 120,
+  "eslint.packageManager": "yarn",
+  "eslint.run": "onSave",
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "html.format.wrapLineLength": 120,
+  "editor.formatOnSave": true,
+  "workbench.editor.highlightModifiedTabs": true,
+  "prettier.requireConfig": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "files.watcherExclude": {
+    "**/build": true,
+    "**/target": true
+  }
+}

@@ -1,0 +1,7 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "dataSetUrn",
+  "type": "string",
+  "description": "",
+  "pattern": "^(?:urn|URN):(?:dv|DV):dataset:[A-Za-z0-9\\-]+$"
+}

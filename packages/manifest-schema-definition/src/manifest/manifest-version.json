@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "version",
+  "type": "string",
+  "title": "version",
+  "description": "Version of the manifest schema definition"
+}

@@ -1,0 +1,10 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "syncType",
+	"type": "string",
+	"enum": [
+		"pull",
+		"push"
+	],
+	"description": "Defines the approach of the data flow to input port. This can be either via `pull` mechanism, in which the `data product engine` will reach to the defined input source and pull the data. It can be triggered from the outside to the product input port via push mechanism"
+}

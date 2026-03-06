@@ -1,0 +1,72 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Sample Service",
+    "description": "OpenAPI specification for Sample Service",
+    "version": "0.0.1"
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "x-feature-toggle": "sample-feature-toggle",
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create a new user",
+        "operationId": "createUser",
+        "requestBody": {
+          "description": "User info",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User has been successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserCreate": {
+        "x-feature-toggle": "sample-feature-toggle",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "email",
+          "roleId"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "maxLength": 255,
+            "minLength": 1
+          },
+          "roleId": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

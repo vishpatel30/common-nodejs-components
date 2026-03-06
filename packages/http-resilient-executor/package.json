@@ -1,0 +1,29 @@
+{
+  "name": "@dataverse/http-resilient-executor",
+  "version": "0.0.1",
+  "description": "NodeJS http resilient executor",
+  "homepage": "https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components#readme",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components.git"
+  },
+  "scripts": {
+    "test": "jest -c ../../jest.config.js",
+    "build": "tsc",
+    "clean": "rm -r ./dist"
+  },
+  "bugs": {
+    "url": "https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components/issues"
+  },
+  "dependencies": {
+    "@dataverse/logger": "^0.0.2",
+    "axios": "^0.24.0",
+    "cockatiel": "^3.0.0-beta.1"
+  },
+  "gitHead": "411e41f5e94703b0ee0bf93df4a39d919c76bf92"
+}

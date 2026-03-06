@@ -1,0 +1,18 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "dataTimeRange",
+	"title": "DataTimeRange",
+	"type": "object",
+	"description": "Needs to be used based on data product type",
+	"properties": {
+		"fromMinDataDate": {
+			"type": "string"
+		},
+		"toMinDataDate": {
+			"type": "string"
+		},
+		"timeColumn": {
+			"type": "string"
+		}
+	}
+}

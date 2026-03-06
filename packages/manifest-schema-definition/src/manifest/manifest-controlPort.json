@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "controlPort",
+  "title": "Control Port",
+  "type": "object",
+  "properties": {
+    "dataQualityRules": {
+      "type": "object",
+      "patternProperties": {
+        "Check$": {
+          "type": "object",
+          "properties": {
+            "inputPort": {
+              "type": "array",
+              "items": {
+                "$ref": "dataQualityCheckCommon"
+              },
+              "minItems": 1
+            },
+            "transformation": {
+              "type": "array",
+              "items": {
+                "$ref": "dataQualityCheckCommon"
+              },
+              "minItems": 1
+            },
+            "productState": {
+              "$ref": "dataQualityCheckCommon"
+            }
+          }
+        }
+      },
+      "minProperties": 1
+    }
+  },
+  "required": []
+}

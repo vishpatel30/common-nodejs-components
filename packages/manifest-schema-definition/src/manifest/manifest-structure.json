@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "manifest",
+  "type": "object",
+  "title": "Dataverse product manifest definition",
+  "description": "This schema document defines the specification for dataverse product engine",
+  "properties": {
+    "version": {},
+    "discoveryPort": {},
+    "inputPorts": {},
+    "transformation": {},
+    "stateManagement": {},
+    "outPutPort": {},
+    "controlPort": {}
+  },
+  "required": [
+    "version",
+    "discoveryPort",
+    "inputPorts",
+    "stateManagement",
+    "transformation",
+    "outPutPort",
+    "controlPort"
+  ]
+}
