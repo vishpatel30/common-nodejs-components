@@ -1,7 +1,7 @@
-import ApiError, { ExtendableError, DetailedError, ResourceNotFoundError } from '@dataverse/errors';
+import ApiError, { ExtendableError, DetailedError, ResourceNotFoundError } from 'commonjs-errors';
 import request from 'supertest';
 import { Request, Response, NextFunction, Router, RequestHandler } from 'express';
-import { forwardError } from '@dataverse/express-forward-error';
+import { forwardError } from 'express-forward-error';
 import * as OpenApiValidator from 'express-openapi-validator';
 import { API } from '../constants';
 import App from '../index';
