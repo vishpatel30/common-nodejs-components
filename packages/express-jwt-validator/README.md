@@ -1,4 +1,4 @@
-# `@dataverse/express-jwt-validator`
+# `express-jwt-validator`
 
 Helper for validating oauth2/openid-connect JWT tokens using public keys loaded from identity providers.
 
@@ -21,7 +21,7 @@ Helper for validating oauth2/openid-connect JWT tokens using public keys loaded 
 
 ```typescript
 // init validator instance (should use 1 instance per app)
-import { jwtValidator, Config } from '@dataverse/express-jwt-validator`';
+import { jwtValidator, Config } from 'express-jwt-validator`';
 
 const config: Config = {
   jwtJwksUri: 'https://testing.well-known.uri/jwks.json',
@@ -45,7 +45,7 @@ const validateJwt = jwtValidator(config);
 this.router.get('/user-info', validateJwt, authController.userInfo);
 
 // use token information in route handlers
-import { AuthorizedRequest } from '@dataverse/express-jwt-validator';
+import { AuthorizedRequest } from 'express-jwt-validator';
 
 getResource: RequestHandler = forwardError(async (req: AuthorizedRequest, res: Response): Promise<void> => {
   // access token information under user field

@@ -7,7 +7,7 @@ import ApiError, {
   MethodNotAllowedError,
   NotAcceptableError,
   UnsupportedMediaTypeError,
-} from './../index';
+} from '../index';
 
 describe('@dataverse/errors', () => {
   describe('ExtendableError', () => {

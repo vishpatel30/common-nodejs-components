@@ -1,16 +1,16 @@
 {
-  "name": "@dataverse/express-jwt-validator",
-  "version": "0.0.7",
+  "name": "express-jwt-validator",
+  "version": "1.0.0",
   "description": "NodeJS dataverse jwt validator",
-  "homepage": "https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components#readme",
+  "homepage": "https://github.com/anokhimg/common-nodejs-components/packages/express-jwt-validator#readme",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components.git"
+    "url": "git+https://github.com/anokhimg/common-nodejs-components.git"
   },
   "scripts": {
     "test": "jest -c ../../jest.config.js",
@@ -18,7 +18,7 @@
     "clean": "rm -r ./dist"
   },
   "bugs": {
-    "url": "https://gitlab.byteprophecy.accenture.com/dataverse/common-nodejs-components/issues"
+    "url": "https://github.com/anokhimg/common-nodejs-components/issues"
   },
   "dependencies": {
     "express-jwt": "^8.4.1",
@@ -30,5 +30,11 @@
     "@types/jsonwebtoken": "^9.0.1",
     "nock": "^13.2.4"
   },
-  "gitHead": "411e41f5e94703b0ee0bf93df4a39d919c76bf92"
+  "keywords": [
+    "jwt-validator",
+    "express",
+    "jsonwebtoken"
+  ],
+  "author": "Byteverse",
+  "license": "ISC"
 }

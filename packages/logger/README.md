@@ -1,4 +1,4 @@
-# `@dataverse/logger`
+# `commonjs-logger`
 
 Logger with support for json and key value based logs.
 
@@ -15,7 +15,7 @@ Logger with support for json and key value based logs.
 ## Usage
 
 ```typescript
-import { getLogger, Config } from '@dataverse/logger';
+import { getLogger, Config } from 'commonjs-logger';
 
 const config: Config = {
       appName: 'test-app-name',

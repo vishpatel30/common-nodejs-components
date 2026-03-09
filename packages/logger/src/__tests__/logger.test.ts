@@ -1,6 +1,6 @@
 import { Config, getLogger } from '../index';
 
-describe('@dataverse/logger', () => {
+describe('commonjs-logger', () => {
   it('should construct a logger with cli config option', () => {
     // given
     const config: Config = {
