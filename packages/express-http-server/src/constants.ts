@@ -9,3 +9,10 @@ export const API = {
   READY_CHECK: '/ready-check',
   SWAGGER_UI: '/api-docs',
 } as const;
+
+export const ENVIRONMENT_MODE_TYPE = {
+  test : 'test',
+  dev: 'development',
+  uat: 'uat',
+  prod: 'production'
+} as const

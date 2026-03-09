@@ -1,7 +1,10 @@
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
-      "outDir": "./dist"
+      "outDir": "./dist",
+      "declaration": true,        // ✅ generates .d.ts files
+      "declarationDir": "./dist",
+      "rootDir": "./src"
     },
     "include": [
       "./src"
