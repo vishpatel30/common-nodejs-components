@@ -1,4 +1,4 @@
-# `@dataverse/express-http-server`
+# `express-http-server`
 
 Express http server for initializing middleware, error handlers, routes, openapi validator and logger.
 
@@ -20,7 +20,7 @@ For logger configuration properties see the
 
 ```typescript
 
-import { App } from '@dataverse/express-http-server';
+import { App } from 'express-http-server';
 
 /**required env values */
 const appConfig = {
