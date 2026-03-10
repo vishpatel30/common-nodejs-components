@@ -15,4 +15,12 @@ export const ENVIRONMENT_MODE_TYPE = {
   dev: 'development',
   uat: 'uat',
   prod: 'production'
-} as const
+} as const;
+
+export const VAULT = {
+  RSA_KEYS_BASE_PATH: 'dev/rsakeys',
+} as const;
+
+export const REDIS = {
+  REDIS_KEY: 'auth:crypto:private-key',
+} as const;

@@ -21,7 +21,8 @@ import cookieParser from 'cookie-parser';
 import { UnauthorizedError as JwtUnauthorizedError } from 'express-jwt-validator';
 import decryptData from './decryptData';
 import encryptData from './encryptData';
-
+import decryptRequest from './decryptRequest';
+import encryptResponse from './encryptResponse';
 export { API, GLOBAL } from './constants';
 
 interface Config {
@@ -32,6 +33,8 @@ interface Config {
   openapiSpec?: any;
   env: string;
   shouldCheckOpenApiBaseSchema?: boolean;
+  vaultProvider?: any;
+  isAsymmetricEnabled?: boolean;
   requestPayloadLimit?: string;
   corsOptions?: CorsOptions;
   encryptionKey?: string;
@@ -107,15 +110,21 @@ export class App {
 
   private decoder() {
     const envKey = this.config.encryptionKey;
-    this.app.use((request: any, _response: any, next: any) => {
-      if (request.body && request.body.data && envKey && this.config.env !== ENVIRONMENT_MODE_TYPE.dev) {
-        const decryptedData: any = decryptData(request.body.data, envKey);
-        request.body = decryptedData.actualData;
-        request.randNum = decryptedData.randNum;
-      }
-      next();
-    });
+    const isAsymmetricEnabled = this.config.isAsymmetricEnabled;
+    if(!isAsymmetricEnabled) {
+      this.app.use((request: any, _response: any, next: any) => {
+        if (request.body && request.body.data && envKey && this.config.env !== ENVIRONMENT_MODE_TYPE.dev) {
+          const decryptedData: any = decryptData(request.body.data, envKey);
+          request.body = decryptedData.actualData;
+          request.randNum = decryptedData.randNum;
+        }
+        next();
+      });
+    } else {
+      this.app.use(decryptRequest(this.config.vaultProvider));
+    }
   }
+
 
   private initLogging() {
     const winstionLogger = expressWinston.logger({
@@ -207,33 +216,38 @@ export class App {
 
   private modifyResponseBody() {
     const envKey = this.config.encryptionKey;
-    this.app.use((req: any, res: any, next: any) => {
-      if (envKey && this.config.env !== ENVIRONMENT_MODE_TYPE.dev) {
-        let oldSend = res.send;
-        let randNum = 0;
-        if (req.method === 'GET') {
-          randNum = req.headers['x-token'] || 0;
-        } else if (req.body) {
-          randNum = req.randNum || 0;
-        }
-        res.send = function (data: any) {
-          if (typeof data === 'object') {
-            let obj = {
-              data: encryptData(
-                {
-                  responseData: data,
-                  randNum,
-                },
-                envKey,
-              ),
-            };
-            arguments[0] = obj;
+    const isAsymmetricEnabled = this.config.isAsymmetricEnabled;
+    if(!isAsymmetricEnabled) {
+      this.app.use((req: any, res: any, next: any) => {
+        if (envKey && this.config.env !== ENVIRONMENT_MODE_TYPE.dev) {
+          let oldSend = res.send;
+          let randNum = 0;
+          if (req.method === 'GET') {
+            randNum = req.headers['x-token'] || 0;
+          } else if (req.body) {
+            randNum = req.randNum || 0;
           }
-          oldSend.apply(res, arguments);
-        };
-      }
-      next();
-    });
+          res.send = function (data: any) {
+            if (typeof data === 'object') {
+              let obj = {
+                data: encryptData(
+                  {
+                    responseData: data,
+                    randNum,
+                  },
+                  envKey,
+                ),
+              };
+              arguments[0] = obj;
+            }
+            oldSend.apply(res, arguments);
+          };
+        }
+        next();
+      });
+    } else {
+      this.app.use(encryptResponse(this.config.vaultProvider));
+    }
   }
 
   private initRoutes() {
