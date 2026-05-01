@@ -121,7 +121,7 @@ export class App {
         next();
       });
     } else {
-      this.app.use(decryptRequest(this.config.vaultProvider));
+      this.app.use(decryptRequest(this.config.vaultProvider,this.logger));
     }
   }
 
@@ -246,7 +246,8 @@ export class App {
         next();
       });
     } else {
-      this.app.use(encryptResponse(this.config.vaultProvider));
+
+      this.app.use(encryptResponse(this.config.vaultProvider,this.logger));
     }
   }
 

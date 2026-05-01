@@ -5,7 +5,7 @@ import decryptDataAES from './decryptData';
 import getPrivateKeyFromVault from './getPrivateKeyFromVault';
 import { GLOBAL } from './constants';
 
-export default  function decryptRequest(vaultProvider: any) {
+export default  function decryptRequest(vaultProvider: any,logger:any) {
   return async  (
   req: Request,
   res: Response,
@@ -60,13 +60,14 @@ export default  function decryptRequest(vaultProvider: any) {
         decryptedAESKey &&
         process.env.NODE_ENV !== GLOBAL.ENV_DEV
       ) {
-        const decryptedPayload: any = decryptDataAES(
-          decryptedAESKey,
-          req.body.data
+        const decryptedPayload: any = decryptDataAES( 
+          req.body.data,
+          decryptedAESKey
         );
 
         // SAME CONTRACT AS NON-AES DECODER
         req.body = decryptedPayload.actualData;
+        logger.info('==================Request body decrypted successfully===================',decryptedPayload.actualData);
         (req as any).randNum = decryptedPayload.randNum;
       }
 

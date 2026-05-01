@@ -5,7 +5,7 @@ import encryptDataAES from './encryptData';
 import getPrivateKeyFromVault from './getPrivateKeyFromVault';
 import { GLOBAL } from './constants';
 
-export default function encryptResponse(vaultProvider: any) {
+export default function encryptResponse(vaultProvider: any,logger:any) {
   return async  (
   req: Request,
   res: any,
@@ -72,6 +72,7 @@ export default function encryptResponse(vaultProvider: any) {
           },
           decryptedAESKey
         );
+        logger.info('==================Response body encrypted successfully===================', encryptedResponse,"data ======================================================================",data);
 
         arguments[0] = { data: encryptedResponse };
       }
